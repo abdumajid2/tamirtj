@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "antd/dist/reset.css";
+
+:root { --brand: #0ea5e9; }
+html, body { height: 100%; background: rgb(255, 255, 255); }
+
+.container { @apply max-w-7xl mx-auto px-4; }
+.section { @apply py-10 md:py-16; }
+.card { @apply bg-white rounded-2xl shadow-sm border border-gray-100; }
+
+
+
+/* высота для контейнера и слайдов — иначе fill «схлопнется» */
+.swiper, .swiper-slide { height: 100%; }
+
+/* чистый fade без прошлых кадров */
+.swiper-slide { opacity: 0 !important; transition: opacity .7s ease !important; }
+.swiper-slide.swiper-slide-active,
+.swiper-slide.swiper-slide-prev,
+.swiper-slide.swiper-slide-next { opacity: 1 !important; }
+
+/* чтобы скрытые слайды не ловили клики */
+.swiper-fade .swiper-slide { pointer-events: none; }
+.swiper-fade .swiper-slide-active { pointer-events: auto; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
