@@ -4,10 +4,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+
+// ✅ Берём из lucide-react и алиасим под твоими именами
 import {
-  LuFileEdit, LuUsers, LuCoins, LuShield, LuMessageSquare,
-  LuPhone, LuStar, LuBadgeCheck, LuFilter,
-} from "react-icons/lu";
+  FileEdit as LuFileEdit,
+  Users as LuUsers,
+  Coins as LuCoins,
+  Shield as LuShield,
+  MessageSquare as LuMessageSquare,
+  Phone as LuPhone,
+  Star as LuStar,
+  BadgeCheck as LuBadgeCheck,
+  Filter as LuFilter,
+} from "lucide-react";
+
 import { useGetMastersQuery, useGetCategoriesQuery } from "@/store/api/baseApi";
 
 const BRAND = { green: "#00B140" };
