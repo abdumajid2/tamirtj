@@ -1,7 +1,7 @@
 "use client";
 import { Provider, useDispatch } from "react-redux";
-import { useEffect, useRef, useState } from "react";
 import store from "@/store";
+import { useEffect, useRef, useState } from "react";
 import {
   hydrateAuth,
   setAuth,
@@ -10,7 +10,6 @@ import {
   writeAuthToStorage,
 } from "@/store/authSlice";
 
-// Тихий рефреш один раз на монт
 function useSilentRefreshOnce() {
   const [done, setDone] = useState(false);
   const started = useRef(false);
@@ -23,33 +22,26 @@ function useSilentRefreshOnce() {
     (async () => {
       try {
         const { accessToken, user } = readAuthFromStorage();
-        // 1) локальная гидрация
         dispatch(hydrateAuth({ accessToken, user }));
 
-        // 2) если токена нет — пробуем refresh по httpOnly cookie
         if (!accessToken) {
           const res = await fetch(
-            process.env.NEXT_PUBLIC_API_AUTH + "/auth/refresh",
+            (process.env.NEXT_PUBLIC_API_AUTH || "http://localhost:4000") + "/auth/refresh",
             { method: "POST", credentials: "include" }
           );
-
           if (res.ok) {
-            const data = await res.json(); // { accessToken }
+            const data = await res.json();
             if (data?.accessToken) {
               dispatch(setAuth({ accessToken: data.accessToken, user: user || null }));
               writeAuthToStorage({ accessToken: data.accessToken, user: user || null });
             }
           } else if (res.status === 401) {
-            // refresh невалиден — чистим локальные следы
             dispatch(clearAuth());
             writeAuthToStorage({ accessToken: null, user: null });
           }
         }
-      } catch {
-        // на всякий случай — не ломаем рендер
-      } finally {
-        setDone(true);
-      }
+      } catch {}
+      finally { setDone(true); }
     })();
   }, [dispatch]);
 
