@@ -14,13 +14,13 @@ export default function HeroSpotlight({
 
   
   slides = [
-    {
-      src: "/hero/slide-1.jpg",
-      src: "/hero/slide-2.jpg",
-      src: "/hero/slide-3.jpg",
-      src: "/hero/slide-4.jpg",
-      src: "/hero/slide-5.jpg",
-    }
+    
+     { src: "/hero/slide-1.jpg"},
+      {src: "/hero/slide-2.jpg"},
+      {src: "/hero/slide-3.jpg"},
+      {src: "/hero/slide-4.jpg"},
+      {src: "/hero/slide-5.jpg"},
+    
   ],
 
   height = "h-[420px] md:h-[520px]",

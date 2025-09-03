@@ -20,10 +20,10 @@ export default function HeroMain() {
     <section className="relative bg-white py-8 md:py-20">
       <div className="flex flex-col md:flex-row items-center md:justify-between gap-8 md:gap-20 px-6">
 
-        {/* Свайпер — на мобильном ПЕРВЫМ, на десктопе справа */}
+
         <div className="flex-1 flex justify-center order-1 md:order-2">
           <div className="relative aspect-square w-64 sm:w-80 md:w-[400px]">
-            <div className="relative w-full h-full rounded-full bg-blue-100/60 ring-1 ring-black/5 shadow-sm overflow-hidden">
+            <div className="relative w-full h-full rounded-full bg-blue-100/60 ring-1 ring-black/5 shadow-md shadow-yellow-300/60 overflow-hidden">
               <Swiper
                 modules={[Autoplay]}
                 effect="fade"
@@ -61,7 +61,6 @@ export default function HeroMain() {
           </div>
         </div>
 
-        {/* Текст + форма — на мобильном ВТОРЫМ, на десктопе слева */}
         <div className="flex-1 basis-[60%] order-2 md:order-1 text-center md:text-left space-y-4 md:space-y-6">
           <h1 className="text-2xl sm:text-3xl md:text-6xl font-extrabold text-gray-900 leading-tight">
             Специалисты по ремонту и строительству со всего Таджикистана!
@@ -88,7 +87,7 @@ export default function HeroMain() {
 
       </div>
 
-      {/* Глобальные стили для скрытия предыдущего слайда (без «призраков») */}
+
       <style jsx global>{`
         .swiper-slide { opacity: 0; transition: opacity 0.6s ease; }
         .swiper-slide.swiper-slide-active { opacity: 1; }
