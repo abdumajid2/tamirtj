@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { useGetServicesQuery } from "@/store/api/baseApi"; // ← поменяй на "@/store/api", если нужно
+import { useGetServicesQuery } from "@/store/api/baseApi"; // или "@/store/api"
 import { Spin } from "antd";
 
 const BRAND_GREEN = "#00B140";
@@ -16,7 +16,7 @@ const FILTERS = [
   { key: "Мебель на заказ", label: "Мебель на заказ" },
 ];
 
-// простая функция перемешивания (Фишер–Йетс)
+// Фишер–Йетс
 function shuffleArray(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
@@ -28,24 +28,26 @@ function shuffleArray(arr) {
 
 export default function ServicesSection() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [shuffleVersion, setShuffleVersion] = useState(0); // меняем, чтобы перешафлить «Все»
+  const [shuffleVersion, setShuffleVersion] = useState(0);
 
   const { data: services = [], isLoading } = useGetServicesQuery();
 
-  // переключатель фильтров; если нажали "Все" — пересобираем порядок
   const onFilterClick = (key) => {
     setActiveFilter(key);
-    if (key === "all") setShuffleVersion((v) => v + 1);
+    if (key === "all") setShuffleVersion((v) => v + 1); // обновим рандом «Все»
   };
 
   const filtered = useMemo(() => {
     if (!services?.length) return [];
-    if (activeFilter === "all") {
-      // перемешиваем ТОЛЬКО при изменении данных или при новом клике на "Все"
-      return shuffleArray(services);
-    }
-    return services.filter((s) => s.category === activeFilter);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Пул данных: либо все, либо по категории
+    const pool =
+      activeFilter === "all"
+        ? services
+        : services.filter((s) => s.category === activeFilter);
+
+    // Берём ровно 3 в случайном порядке (или меньше, если записей < 3)
+    return shuffleArray(pool).slice(0, 3);
+    // для «Все» учитываем shuffleVersion, чтобы перетасовывать при повторном клике
   }, [services, activeFilter, shuffleVersion]);
 
   return (
@@ -65,25 +67,37 @@ export default function ServicesSection() {
           </h2>
 
           <p className="text-gray-600 text-[19px] max-w-3xl mt-2">
-            Боитесь, что мастер затянет сроки, повысит цену или плохо сделает свою работу?
-            Тогда воспользуйтесь услугой «Безопасная сделка».
+            Боитесь, что мастер затянет сроки, повысит цену или плохо сделает
+            свою работу? Тогда воспользуйтесь услугой «Безопасная сделка».
           </p>
 
           <ul className="mt-4 text-[18px] space-y-2 text-gray-700">
             <li className="flex items-start gap-2">
-              <span className="mt-1 inline-block h-5 w-5 rounded-full" style={{ backgroundColor: BRAND_GREEN }} />
+              <span
+                className="mt-1 inline-block h-5 w-5 rounded-full"
+                style={{ backgroundColor: BRAND_GREEN }}
+              />
               <span>Платите только после выполненной работы.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="mt-1 inline-block h-5 w-5 rounded-full" style={{ backgroundColor: BRAND_GREEN }} />
+              <span
+                className="mt-1 inline-block h-5 w-5 rounded-full"
+                style={{ backgroundColor: BRAND_GREEN }}
+              />
               <span>Фиксированная цена</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="mt-1 inline-block h-5 w-5 rounded-full" style={{ backgroundColor: BRAND_GREEN }} />
+              <span
+                className="mt-1 inline-block h-5 w-5 rounded-full"
+                style={{ backgroundColor: BRAND_GREEN }}
+              />
               <span>Выезд мастера — от 30 минут</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="mt-1 inline-block h-5 w-5 rounded-full" style={{ backgroundColor: BRAND_GREEN }} />
+              <span
+                className="mt-1 inline-block h-5 w-5 rounded-full"
+                style={{ backgroundColor: BRAND_GREEN }}
+              />
               <span>Гарантия до 12 месяцев</span>
             </li>
           </ul>
@@ -112,25 +126,35 @@ export default function ServicesSection() {
           })}
         </div>
 
-        {/* Состояния загрузки/пусто */}
+        {/* Состояния */}
         {isLoading && (
-          <div className="mt-6 w-20 m-auto text-gray-500"><Spin/></div>
+          <div className="mt-6 w-20 m-auto text-gray-500">
+            <div className="relative flex items-center justify-center w-10 h-6">
+              <span className="orbit w-5 h-5 bg-blue-500 rounded-full absolute"></span>
+              <span className="orbit-reverse w-5 h-5 bg-green-500 rounded-full absolute"></span>
+            </div>
+          </div>
         )}
         {!isLoading && filtered.length === 0 && (
-          <div className="mt-6 text-gray-500">Пока нет услуг по этому фильтру.</div>
+          <div className="mt-6 flex justify-center text-gray-500">
+            <div className="relative flex items-center justify-center w-10 h-6">
+              <span className="orbit w-5 h-5 bg-blue-500 rounded-full absolute"></span>
+              <span className="orbit-reverse w-5 h-5 bg-green-500 rounded-full absolute"></span>
+            </div>
+          </div>
         )}
 
-        {/* Карточки услуг */}
+        {/* Карточки услуг (ровно 3) */}
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((s) => (
             <article
               key={s.id}
-              className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col"
+              className="bg-white rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden flex flex-col"
             >
               <div className="relative h-40 w-full">
                 <Image
                   src={s.image}
-                  alt=''
+                  alt=""
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -164,7 +188,10 @@ export default function ServicesSection() {
                 </button>
 
                 <div className="flex items-center justify-between text-sm text-gray-600 mt-1">
-                  <Link href={`/services/${s.id}`} className="flex items-center gap-1 group">
+                  <Link
+                    href={`/services/${s.id}`}
+                    className="flex items-center gap-1 group"
+                  >
                     <span className="hover:!text-green-500">Подробнее</span>
                     <svg
                       className="w-4 h-4 transition-transform group-hover:translate-x-0.5"

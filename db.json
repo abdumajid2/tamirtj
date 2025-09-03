@@ -359,7 +359,7 @@
     {
       "id": "104",
       "fullName": "Саид Рахимов",
-      "avatar": "https://ui-avatars.com/api/?name=Саид+Рахимов&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "4",
       "subCategoryIds": ["401", "402"],
       "rating": 4.7,
@@ -384,7 +384,7 @@
     {
       "id": "105",
       "fullName": "Бехруз Юсупов",
-      "avatar": "https://ui-avatars.com/api/?name=Бехруз+Юсупов&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "5",
       "subCategoryIds": ["501", "503"],
       "rating": 4.6,
@@ -408,7 +408,7 @@
     {
       "id": "106",
       "fullName": "Насим Ахмадов",
-      "avatar": "https://ui-avatars.com/api/?name=Насим+Ахмадов&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "6",
       "subCategoryIds": ["601", "603"],
       "rating": 4.8,
@@ -433,7 +433,7 @@
     {
       "id": "107",
       "fullName": "Шохрух Джураев",
-      "avatar": "https://ui-avatars.com/api/?name=Шохрух+Джураев&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "7",
       "subCategoryIds": ["701", "702"],
       "rating": 4.5,
@@ -457,7 +457,7 @@
     {
       "id": "108",
       "fullName": "Фаррух Хашимов",
-      "avatar": "https://ui-avatars.com/api/?name=Фаррух+Хашимов&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "11",
       "subCategoryIds": ["1101", "1102"],
       "rating": 4.7,
@@ -482,7 +482,7 @@
     {
       "id": "109",
       "fullName": "Далер Исмоилов",
-      "avatar": "https://ui-avatars.com/api/?name=Далер+Исмоилов&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "12",
       "subCategoryIds": ["1201", "1203"],
       "rating": 4.8,
@@ -506,7 +506,7 @@
     {
       "id": "110",
       "fullName": "Зубайдулло Мирзоев",
-      "avatar": "https://ui-avatars.com/api/?name=Зубайдулло+Мирзоев&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "8",
       "subCategoryIds": ["801", "803"],
       "rating": 4.6,
@@ -530,7 +530,7 @@
     {
       "id": "111",
       "fullName": "Кароматулло Абдуллаев",
-      "avatar": "https://ui-avatars.com/api/?name=Кароматулло+Абдуллаев&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "9",
       "subCategoryIds": ["901", "903"],
       "rating": 4.7,
@@ -555,7 +555,7 @@
     {
       "id": "112",
       "fullName": "Зайнаб Шарипова",
-      "avatar": "https://ui-avatars.com/api/?name=Зайнаб+Шарипова&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "13",
       "subCategoryIds": ["1301", "1303"],
       "rating": 4.9,
@@ -580,7 +580,7 @@
     {
       "id": "113",
       "fullName": "Мурод Алиев",
-      "avatar": "https://ui-avatars.com/api/?name=Мурод+Алиев&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "10",
       "subCategoryIds": ["1001", "1003"],
       "rating": 4.6,
@@ -604,7 +604,7 @@
     {
       "id": "114",
       "fullName": "Собирджон Ниёзов",
-      "avatar": "https://ui-avatars.com/api/?name=Собирджон+Ниёзов&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "17",
       "subCategoryIds": ["1702", "1703"],
       "rating": 4.8,
@@ -629,7 +629,7 @@
     {
       "id": "115",
       "fullName": "Хуршед Курбанов",
-      "avatar": "https://ui-avatars.com/api/?name=Хуршед+Курбанов&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "18",
       "subCategoryIds": ["1801", "1804"],
       "rating": 4.5,
@@ -653,7 +653,7 @@
     {
       "id": "116",
       "fullName": "Мадина Рахматова",
-      "avatar": "https://ui-avatars.com/api/?name=Мадина+Рахматова&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "15",
       "subCategoryIds": ["1501", "1503"],
       "rating": 4.9,
@@ -677,7 +677,7 @@
     {
       "id": "117",
       "fullName": "Абдувахоб Холиков",
-      "avatar": "https://ui-avatars.com/api/?name=Абдувахоб+Холиков&background=random&size=256",
+      "avatar": "/hero/red8.png",
       "categoryId": "14",
       "subCategoryIds": ["1402", "1403"],
       "rating": 4.7,

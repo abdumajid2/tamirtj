@@ -13,7 +13,15 @@ export default function HeroSpotlight({
   ctaHref = "#",
 
   
-  slides = [],
+  slides = [
+    {
+      src: "/hero/slide-1.jpg",
+      src: "/hero/slide-2.jpg",
+      src: "/hero/slide-3.jpg",
+      src: "/hero/slide-4.jpg",
+      src: "/hero/slide-5.jpg",
+    }
+  ],
 
   height = "h-[420px] md:h-[520px]",
   className = "",
@@ -51,6 +59,7 @@ export default function HeroSpotlight({
           priority
           className="object-cover"
           sizes="100vw"
+          
         />
       ) : (
         <div className="absolute inset-0 bg-neutral-800" />

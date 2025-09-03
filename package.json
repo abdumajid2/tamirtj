@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:3001": "next dev -p 3001",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "eslint",
     "api": "node server.js"
   },

@@ -4,7 +4,7 @@
 html, body { height: 100%; background: rgb(255, 255, 255); }
 
 .container { @apply max-w-7xl mx-auto px-4; }
-.section { @apply py-10 md:py-16; }
+.section { @apply py-10 md:py-6; }
 .card { @apply bg-white rounded-2xl shadow-sm border border-gray-100; }
 
 
@@ -24,3 +24,36 @@ html, body { height: 100%; background: rgb(255, 255, 255); }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+
+@keyframes orbit {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(12px); }
+  100% { transform: translateX(0); }
+}
+@keyframes orbit-reverse {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(-12px); }
+  100% { transform: translateX(0); }
+}
+
+.orbit {
+  animation: orbit 1s infinite ease-in-out;
+}
+.orbit-reverse {
+  animation: orbit-reverse 1s infinite ease-in-out;
+}
+
+
+/* Swiper bullets зелёные + плавность */
+.reviews-pagination .swiper-pagination-bullet {
+  width: 7px;
+  height: 7px;
+  background: #d1fae5; /* светло-зелёный */
+  opacity: 1;
+}
+.reviews-pagination .swiper-pagination-bullet-active {
+  background: #00B140; /* фирменный зелёный */
+  transform: scale(1.2);
+}
