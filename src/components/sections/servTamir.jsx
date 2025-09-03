@@ -62,7 +62,7 @@ function MasterCard({ m, catName }) {
     <article className="bg-white rounded-[22px] border border-gray-100 shadow-[0_12px_40px_rgba(17,24,39,0.08)] overflow-hidden">
       <div className="p-5 flex items-start gap-3">
         <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border border-gray-100">
-          <Image src="https://picsum.photos/seed/master-104-1/1200/800" width={600} height={400} alt="" unoptimized />
+          <Image src="https://picsum.photos/seed/master-104-1/1200/800" width={700} height={500} loading="lazy" alt="" unoptimized />
 
         </div>
 

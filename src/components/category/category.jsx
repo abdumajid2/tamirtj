@@ -12,8 +12,8 @@ const Category = () => {
             поиск и быстрый отклик
           </h2>
         </article>
-        <section className="mt-14 flex justify-between">
-          <article className="flex flex-col justify-around h-[320px] w-[285px] rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
+        <section className="mt-14 flex flex-col gap-6 md:gap-0 md:flex-row justify-center items-center md:justify-between">
+          <article className="flex flex-col justify-around h-[320px] w-full md:w-[285px] rounded-lg shadow-md shadow-blue-200/60 p-6 hover:shadow-xl transition-shadow duration-300">
             <Building2 className="text-[#00B140] text-2xl w-8 h-8" />
             <h3 className="text-lg font-bold">Строй</h3>
             <div className="text-gray-600 flex flex-wrap gap-4 text-[11px]">
@@ -28,7 +28,7 @@ const Category = () => {
               </p>
             </div>
           </article>
-          <article className="flex flex-col justify-around h-[320px] w-[285px] rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
+          <article className="flex flex-col justify-around h-[320px] w-full md:w-[285px] rounded-lg shadow-md shadow-blue-200/60 p-6 hover:shadow-xl transition-shadow duration-300">
             <Car className="text-red-500 text-2xl w-8 h-8" />
             <h3 className="text-lg font-bold">Авто</h3>
             <div className="text-gray-600 flex flex-wrap gap-4 text-[11px]">
@@ -43,7 +43,7 @@ const Category = () => {
               </p>
             </div>
           </article>
-          <article className="flex flex-col justify-around h-[320px] w-[285px] rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
+          <article className="flex flex-col justify-around h-[320px] w-full md:w-[285px] rounded-lg shadow-md shadow-blue-200/60 p-6 hover:shadow-xl transition-shadow duration-300">
             <WashingMachine className="text-blue-500 text-2xl w-8 h-8" />
             <h3 className="text-lg font-bold">Техника</h3>
             <div className="text-gray-600 flex flex-wrap gap-4 text-[11px]">
@@ -58,7 +58,7 @@ const Category = () => {
               </p>
             </div>
           </article>
-          <article className="flex flex-col justify-around h-[320px] w-[285px] rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
+          <article className="flex flex-col justify-around h-[320px] w-full md:w-[285px] rounded-lg shadow-blue-200/60 shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
             <HiMiniWrenchScrewdriver className="text-orange-500 text-2xl w-8 h-8" />
             <h3 className="text-lg font-bold">Бытовые услуги</h3>
             <div className="text-gray-600 flex flex-wrap gap-4 text-[11px]">

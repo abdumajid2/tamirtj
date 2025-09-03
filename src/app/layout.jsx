@@ -5,6 +5,7 @@ export const metadata = {
 
 import "./globals.css";
 import Providers from "@/app/providers";
+import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
 export default function RootLayout({ children }) {
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Navbar />
           <main className="section container">{children}</main>
+          <Footer/>
         </Providers>
       </body>
     </html>
