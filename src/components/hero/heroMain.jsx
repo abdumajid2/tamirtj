@@ -23,7 +23,7 @@ export default function HeroMain() {
 
         <div className="flex-1 flex justify-center order-1 md:order-2">
           <div className="relative aspect-square w-64 sm:w-80 md:w-[400px]">
-            <div className="relative w-full h-full rounded-full bg-blue-100/60 ring-1 ring-black/5 shadow-md shadow-yellow-300/60 overflow-hidden">
+            <div className="relative w-full h-full rounded-full bg-blue-100/60 ring-1 ring-black/5 shadow-2xl shadow-blue-200/60 overflow-hidden">
               <Swiper
                 modules={[Autoplay]}
                 effect="fade"

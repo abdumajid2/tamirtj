@@ -15,7 +15,11 @@
         { "id": "101", "name": "Установка сантехники", "slug": "install" },
         { "id": "102", "name": "Ремонт протечек", "slug": "leak-fix" },
         { "id": "103", "name": "Чистка засоров", "slug": "clog-clean" },
-        { "id": "104", "name": "Отопление (радиаторы)", "slug": "heating-rads" },
+        {
+          "id": "104",
+          "name": "Отопление (радиаторы)",
+          "slug": "heating-rads"
+        },
         { "id": "105", "name": "Водопровод/канализация", "slug": "pipework" }
       ]
     },
@@ -59,7 +63,11 @@
       "slug": "drywall",
       "subcategories": [
         { "id": "501", "name": "Каркас/обшивка ГКЛ", "slug": "frame" },
-        { "id": "502", "name": "Перегородки/зонирование", "slug": "partitions" },
+        {
+          "id": "502",
+          "name": "Перегородки/зонирование",
+          "slug": "partitions"
+        },
         { "id": "503", "name": "Ниши/короба/арки", "slug": "niches" }
       ]
     },
@@ -79,8 +87,16 @@
       "name": "Окна и двери",
       "slug": "windows-doors",
       "subcategories": [
-        { "id": "701", "name": "Монтаж окон ПВХ/Al", "slug": "windows-install" },
-        { "id": "702", "name": "Регулировка/ремонт окон", "slug": "windows-repair" },
+        {
+          "id": "701",
+          "name": "Монтаж окон ПВХ/Al",
+          "slug": "windows-install"
+        },
+        {
+          "id": "702",
+          "name": "Регулировка/ремонт окон",
+          "slug": "windows-repair"
+        },
         { "id": "703", "name": "Входные/межкомнатные двери", "slug": "doors" },
         { "id": "704", "name": "Москитные сетки/отливы", "slug": "mosquito" }
       ]
@@ -92,7 +108,11 @@
       "subcategories": [
         { "id": "801", "name": "Ворота/калитки", "slug": "gates" },
         { "id": "802", "name": "Решетки/перила", "slug": "rails" },
-        { "id": "803", "name": "Ремонт металлоконструкций", "slug": "metal-repair" }
+        {
+          "id": "803",
+          "name": "Ремонт металлоконструкций",
+          "slug": "metal-repair"
+        }
       ]
     },
     {
@@ -102,7 +122,11 @@
       "subcategories": [
         { "id": "901", "name": "Монтаж кровли", "slug": "roof" },
         { "id": "902", "name": "Ремонт протечек", "slug": "roof-fix" },
-        { "id": "903", "name": "Утепление фасада", "slug": "facade-insulation" },
+        {
+          "id": "903",
+          "name": "Утепление фасада",
+          "slug": "facade-insulation"
+        },
         { "id": "904", "name": "Декоративный фасад", "slug": "facade-decor" }
       ]
     },
@@ -288,10 +312,26 @@
     }
   ],
   "faqs": [
-    { "id": 1, "question": "После регистрации не получил письмо. Что делать?", "answer": "Проверьте папку «Спам». Если письма нет — войдите по номеру телефона или свяжитесь с поддержкой." },
-    { "id": 2, "question": "Не помню пароль", "answer": "Используйте восстановление пароля по email или телефону." },
-    { "id": 3, "question": "Как изменить пароль?", "answer": "Зайдите в профиль → Настройки → Безопасность." },
-    { "id": 4, "question": "В каких городах доступны мастера?", "answer": "Во всех крупных городах Таджикистана. Список городов есть на главной." }
+    {
+      "id": 1,
+      "question": "После регистрации не получил письмо. Что делать?",
+      "answer": "Проверьте папку «Спам». Если письма нет — войдите по номеру телефона или свяжитесь с поддержкой."
+    },
+    {
+      "id": 2,
+      "question": "Не помню пароль",
+      "answer": "Используйте восстановление пароля по email или телефону."
+    },
+    {
+      "id": 3,
+      "question": "Как изменить пароль?",
+      "answer": "Зайдите в профиль → Настройки → Безопасность."
+    },
+    {
+      "id": 4,
+      "question": "В каких городах доступны мастера?",
+      "answer": "Во всех крупных городах Таджикистана. Список городов есть на главной."
+    }
   ],
   "users": [
     {
@@ -700,6 +740,35 @@
       ]
     }
   ],
+  "threads": [
+    {
+      "id": "t-107-u1",
+      "masterId": "107",
+      "userId": "1",
+      "lastMessage": "Добрый вечер!",
+      "lastTs": "2025-09-13T19:05:00Z",
+      "unreadForUser": 0,
+      "unreadForMaster": 1
+    }
+  ],
+
+  "messages": [
+    {
+      "id": "m1",
+      "threadId": "t-107-u1",
+      "from": "user",
+      "text": "Здравствуйте!",
+      "createdAt": "2025-09-13T19:00:00Z"
+    },
+    {
+      "id": "m2",
+      "threadId": "t-107-u1",
+      "from": "master",
+      "text": "Добрый вечер!",
+      "createdAt": "2025-09-13T19:05:00Z"
+    }
+  ],
+
   "companies": [
     {
       "id": "201",
@@ -716,12 +785,27 @@
       "cityId": "1",
       "address": "Душанбе, ул. Рудаки 25",
       "phones": ["+992900111222", "+992900333444"],
-      "workHours": { "monFri": "09:00-19:00", "sat": "10:00-17:00", "sun": "выходной" },
-      "photos": ["/uploads/companies/tamir-1.jpg", "/uploads/companies/tamir-2.jpg"],
+      "workHours": {
+        "monFri": "09:00-19:00",
+        "sat": "10:00-17:00",
+        "sun": "выходной"
+      },
+      "photos": [
+        "/uploads/companies/tamir-1.jpg",
+        "/uploads/companies/tamir-2.jpg"
+      ],
       "description": "Строительно-отделочные работы: сантехника, электрика, покраска, ГКЛ.",
       "portfolio": [
-        { "id": "p-201-1", "title": "Ремонт ванной", "image": "/uploads/portfolio/tamir-bath.jpg" },
-        { "id": "p-201-2", "title": "Покраска и обои", "image": "/uploads/portfolio/tamir-wall.jpg" }
+        {
+          "id": "p-201-1",
+          "title": "Ремонт ванной",
+          "image": "/uploads/portfolio/tamir-bath.jpg"
+        },
+        {
+          "id": "p-201-2",
+          "title": "Покраска и обои",
+          "image": "/uploads/portfolio/tamir-wall.jpg"
+        }
       ]
     },
     {
@@ -739,7 +823,11 @@
       "cityId": "1",
       "address": "Душанбе, пр. Сомони 12",
       "phones": ["+992900555666"],
-      "workHours": { "monFri": "08:00-20:00", "sat": "09:00-18:00", "sun": "09:00-16:00" },
+      "workHours": {
+        "monFri": "08:00-20:00",
+        "sat": "09:00-18:00",
+        "sun": "09:00-16:00"
+      },
       "photos": ["/uploads/companies/cleanpro-1.jpg"],
       "description": "Клининг квартир/офисов, после ремонта, мойка окон, химчистка."
     },
@@ -758,7 +846,11 @@
       "cityId": "2",
       "address": "Худжанд, ш. И.Сомони 4",
       "phones": ["+992900777888"],
-      "workHours": { "monFri": "09:00-19:00", "sat": "09:00-17:00", "sun": "выходной" },
+      "workHours": {
+        "monFri": "09:00-19:00",
+        "sat": "09:00-17:00",
+        "sun": "выходной"
+      },
       "photos": ["/uploads/companies/automaster-1.jpg"],
       "description": "Полный автосервис: мотор, подвеска, электрика, шиномонтаж."
     }
@@ -865,8 +957,20 @@
     }
   ],
   "comments": [
-    { "id": "9101", "reviewId": "9001", "userId": "2", "text": "Тоже вызывал — ок", "createdAt": "2025-08-29T15:00:00Z" },
-    { "id": "9102", "reviewId": "9002", "userId": "3", "text": "Подтверждаю", "createdAt": "2025-08-29T11:00:00Z" }
+    {
+      "id": "9101",
+      "reviewId": "9001",
+      "userId": "2",
+      "text": "Тоже вызывал — ок",
+      "createdAt": "2025-08-29T15:00:00Z"
+    },
+    {
+      "id": "9102",
+      "reviewId": "9002",
+      "userId": "3",
+      "text": "Подтверждаю",
+      "createdAt": "2025-08-29T11:00:00Z"
+    }
   ],
   "services": [
     {
@@ -1022,6 +1126,20 @@
       "price": 420,
       "currency": "сомони",
       "image": "https://images.unsplash.com/photo-1505692794403-34d4982c1e8f?q=80&w=1600&auto=format&fit=crop"
+    }
+  ],
+  "role": [
+    {
+      "id": 1,
+      "name": "user"
+    },
+    {
+      "id": 2,
+      "name": "admin"
+    },
+    {
+      "id": 3,
+      "name": "master"
     }
   ]
 }

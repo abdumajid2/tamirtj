@@ -1,333 +1,735 @@
 {
   "cities": [
-    { "id": "1", "name": "Душанбе", "slug": "dushanbe" },
-    { "id": "2", "name": "Худжанд", "slug": "khujand" },
-    { "id": "3", "name": "Бохтар", "slug": "bokhtar" },
-    { "id": "4", "name": "Куляб", "slug": "kulob" },
-    { "id": "5", "name": "Истаравшан", "slug": "istarravshan" }
+    {
+      "id": 1,
+      "name": "Душанбе",
+      "slug": "dushanbe"
+    },
+    {
+      "id": 2,
+      "name": "Худжанд",
+      "slug": "khujand"
+    },
+    {
+      "id": 3,
+      "name": "Бохтар",
+      "slug": "bokhtar"
+    },
+    {
+      "id": 4,
+      "name": "Куляб",
+      "slug": "kulob"
+    },
+    {
+      "id": 5,
+      "name": "Истаравшан",
+      "slug": "istarravshan"
+    }
   ],
   "categories": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Сантехника",
       "slug": "plumbing",
       "subcategories": [
-        { "id": "101", "name": "Установка сантехники", "slug": "install" },
-        { "id": "102", "name": "Ремонт протечек", "slug": "leak-fix" },
-        { "id": "103", "name": "Чистка засоров", "slug": "clog-clean" },
-        { "id": "104", "name": "Отопление (радиаторы)", "slug": "heating-rads" },
-        { "id": "105", "name": "Водопровод/канализация", "slug": "pipework" }
+        {
+          "id": 101,
+          "name": "Установка сантехники",
+          "slug": "install"
+        },
+        {
+          "id": 102,
+          "name": "Ремонт протечек",
+          "slug": "leak-fix"
+        },
+        {
+          "id": 103,
+          "name": "Чистка засоров",
+          "slug": "clog-clean"
+        },
+        {
+          "id": 104,
+          "name": "Отопление (радиаторы)",
+          "slug": "heating-rads"
+        },
+        {
+          "id": 105,
+          "name": "Водопровод/канализация",
+          "slug": "pipework"
+        }
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Электрика",
       "slug": "electric",
       "subcategories": [
-        { "id": "201", "name": "Проводка и монтаж", "slug": "wiring" },
-        { "id": "202", "name": "Розетки/выключатели", "slug": "sockets" },
-        { "id": "203", "name": "Щитки/автоматы", "slug": "panels" },
-        { "id": "204", "name": "Освещение/люстры", "slug": "lighting" },
-        { "id": "205", "name": "УЗО/дифавтоматы", "slug": "rcd" }
+        {
+          "id": 201,
+          "name": "Проводка и монтаж",
+          "slug": "wiring"
+        },
+        {
+          "id": 202,
+          "name": "Розетки/выключатели",
+          "slug": "sockets"
+        },
+        {
+          "id": 203,
+          "name": "Щитки/автоматы",
+          "slug": "panels"
+        },
+        {
+          "id": 204,
+          "name": "Освещение/люстры",
+          "slug": "lighting"
+        },
+        {
+          "id": 205,
+          "name": "УЗО/дифавтоматы",
+          "slug": "rcd"
+        }
       ]
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Плиточные работы",
       "slug": "tiling",
       "subcategories": [
-        { "id": "301", "name": "Пол", "slug": "floor" },
-        { "id": "302", "name": "Стены/фартук", "slug": "walls" },
-        { "id": "303", "name": "Затирка/герметизация", "slug": "grout" },
-        { "id": "304", "name": "Душевые/ванные", "slug": "bathroom" }
+        {
+          "id": 301,
+          "name": "Пол",
+          "slug": "floor"
+        },
+        {
+          "id": 302,
+          "name": "Стены/фартук",
+          "slug": "walls"
+        },
+        {
+          "id": 303,
+          "name": "Затирка/герметизация",
+          "slug": "grout"
+        },
+        {
+          "id": 304,
+          "name": "Душевые/ванные",
+          "slug": "bathroom"
+        }
       ]
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Малярные работы",
       "slug": "painting",
       "subcategories": [
-        { "id": "401", "name": "Покраска стен/потолков", "slug": "paint" },
-        { "id": "402", "name": "Шпатлевка/выравнивание", "slug": "putty" },
-        { "id": "403", "name": "Поклейка обоев", "slug": "wallpaper" },
-        { "id": "404", "name": "Декоративные покрытия", "slug": "decor" }
+        {
+          "id": 401,
+          "name": "Покраска стен/потолков",
+          "slug": "paint"
+        },
+        {
+          "id": 402,
+          "name": "Шпатлевка/выравнивание",
+          "slug": "putty"
+        },
+        {
+          "id": 403,
+          "name": "Поклейка обоев",
+          "slug": "wallpaper"
+        },
+        {
+          "id": 404,
+          "name": "Декоративные покрытия",
+          "slug": "decor"
+        }
       ]
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "ГКЛ и перегородки",
       "slug": "drywall",
       "subcategories": [
-        { "id": "501", "name": "Каркас/обшивка ГКЛ", "slug": "frame" },
-        { "id": "502", "name": "Перегородки/зонирование", "slug": "partitions" },
-        { "id": "503", "name": "Ниши/короба/арки", "slug": "niches" }
+        {
+          "id": 501,
+          "name": "Каркас/обшивка ГКЛ",
+          "slug": "frame"
+        },
+        {
+          "id": 502,
+          "name": "Перегородки/зонирование",
+          "slug": "partitions"
+        },
+        {
+          "id": 503,
+          "name": "Ниши/короба/арки",
+          "slug": "niches"
+        }
       ]
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "Полы",
       "slug": "flooring",
       "subcategories": [
-        { "id": "601", "name": "Ламинат/паркет", "slug": "laminate" },
-        { "id": "602", "name": "Линолеум/ковролин", "slug": "linoleum" },
-        { "id": "603", "name": "Стяжка пола", "slug": "screed" },
-        { "id": "604", "name": "Тёплый пол", "slug": "underfloor" }
+        {
+          "id": 601,
+          "name": "Ламинат/паркет",
+          "slug": "laminate"
+        },
+        {
+          "id": 602,
+          "name": "Линолеум/ковролин",
+          "slug": "linoleum"
+        },
+        {
+          "id": 603,
+          "name": "Стяжка пола",
+          "slug": "screed"
+        },
+        {
+          "id": 604,
+          "name": "Тёплый пол",
+          "slug": "underfloor"
+        }
       ]
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "Окна и двери",
       "slug": "windows-doors",
       "subcategories": [
-        { "id": "701", "name": "Монтаж окон ПВХ/Al", "slug": "windows-install" },
-        { "id": "702", "name": "Регулировка/ремонт окон", "slug": "windows-repair" },
-        { "id": "703", "name": "Входные/межкомнатные двери", "slug": "doors" },
-        { "id": "704", "name": "Москитные сетки/отливы", "slug": "mosquito" }
+        {
+          "id": 701,
+          "name": "Монтаж окон ПВХ/Al",
+          "slug": "windows-install"
+        },
+        {
+          "id": 702,
+          "name": "Регулировка/ремонт окон",
+          "slug": "windows-repair"
+        },
+        {
+          "id": 703,
+          "name": "Входные/межкомнатные двери",
+          "slug": "doors"
+        },
+        {
+          "id": 704,
+          "name": "Москитные сетки/отливы",
+          "slug": "mosquito"
+        }
       ]
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "Сварка/металлоконструкции",
       "slug": "welding",
       "subcategories": [
-        { "id": "801", "name": "Ворота/калитки", "slug": "gates" },
-        { "id": "802", "name": "Решетки/перила", "slug": "rails" },
-        { "id": "803", "name": "Ремонт металлоконструкций", "slug": "metal-repair" }
+        {
+          "id": 801,
+          "name": "Ворота/калитки",
+          "slug": "gates"
+        },
+        {
+          "id": 802,
+          "name": "Решетки/перила",
+          "slug": "rails"
+        },
+        {
+          "id": 803,
+          "name": "Ремонт металлоконструкций",
+          "slug": "metal-repair"
+        }
       ]
     },
     {
-      "id": "9",
+      "id": 9,
       "name": "Кровля/Фасад",
       "slug": "roof-facade",
       "subcategories": [
-        { "id": "901", "name": "Монтаж кровли", "slug": "roof" },
-        { "id": "902", "name": "Ремонт протечек", "slug": "roof-fix" },
-        { "id": "903", "name": "Утепление фасада", "slug": "facade-insulation" },
-        { "id": "904", "name": "Декоративный фасад", "slug": "facade-decor" }
+        {
+          "id": 901,
+          "name": "Монтаж кровли",
+          "slug": "roof"
+        },
+        {
+          "id": 902,
+          "name": "Ремонт протечек",
+          "slug": "roof-fix"
+        },
+        {
+          "id": 903,
+          "name": "Утепление фасада",
+          "slug": "facade-insulation"
+        },
+        {
+          "id": 904,
+          "name": "Декоративный фасад",
+          "slug": "facade-decor"
+        }
       ]
     },
     {
-      "id": "10",
+      "id": 10,
       "name": "Потолки",
       "slug": "ceilings",
       "subcategories": [
-        { "id": "1001", "name": "Натяжные потолки", "slug": "stretch" },
-        { "id": "1002", "name": "ПВХ/реечные/Armstrong", "slug": "panel" },
-        { "id": "1003", "name": "Подсветка/карнизы", "slug": "lighting" }
+        {
+          "id": 1001,
+          "name": "Натяжные потолки",
+          "slug": "stretch"
+        },
+        {
+          "id": 1002,
+          "name": "ПВХ/реечные/Armstrong",
+          "slug": "panel"
+        },
+        {
+          "id": 1003,
+          "name": "Подсветка/карнизы",
+          "slug": "lighting"
+        }
       ]
     },
     {
-      "id": "11",
+      "id": 11,
       "name": "Кондиционеры (HVAC)",
       "slug": "hvac",
       "subcategories": [
-        { "id": "1101", "name": "Монтаж/демонтаж", "slug": "install" },
-        { "id": "1102", "name": "Заправка/профчистка", "slug": "service" },
-        { "id": "1103", "name": "Диагностика/ремонт", "slug": "repair" }
+        {
+          "id": 1101,
+          "name": "Монтаж/демонтаж",
+          "slug": "install"
+        },
+        {
+          "id": 1102,
+          "name": "Заправка/профчистка",
+          "slug": "service"
+        },
+        {
+          "id": 1103,
+          "name": "Диагностика/ремонт",
+          "slug": "repair"
+        }
       ]
     },
     {
-      "id": "12",
+      "id": 12,
       "name": "Отопление/водоснабжение",
       "slug": "heating-water",
       "subcategories": [
-        { "id": "1201", "name": "Котлы/коллекторы", "slug": "boilers" },
-        { "id": "1202", "name": "Радиаторы/трубы", "slug": "rads" },
-        { "id": "1203", "name": "Тёплый пол (вода)", "slug": "ufh-water" }
+        {
+          "id": 1201,
+          "name": "Котлы/коллекторы",
+          "slug": "boilers"
+        },
+        {
+          "id": 1202,
+          "name": "Радиаторы/трубы",
+          "slug": "rads"
+        },
+        {
+          "id": 1203,
+          "name": "Тёплый пол (вода)",
+          "slug": "ufh-water"
+        }
       ]
     },
     {
-      "id": "13",
+      "id": 13,
       "name": "Мебель и кухни",
       "slug": "furniture",
       "subcategories": [
-        { "id": "1301", "name": "Сборка мебели", "slug": "assembly" },
-        { "id": "1302", "name": "Ремонт мебели", "slug": "repair" },
-        { "id": "1303", "name": "Монтаж кухни", "slug": "kitchen" },
-        { "id": "1304", "name": "Столешницы/фасады", "slug": "worktops" }
+        {
+          "id": 1301,
+          "name": "Сборка мебели",
+          "slug": "assembly"
+        },
+        {
+          "id": 1302,
+          "name": "Ремонт мебели",
+          "slug": "repair"
+        },
+        {
+          "id": 1303,
+          "name": "Монтаж кухни",
+          "slug": "kitchen"
+        },
+        {
+          "id": 1304,
+          "name": "Столешницы/фасады",
+          "slug": "worktops"
+        }
       ]
     },
     {
-      "id": "14",
+      "id": 14,
       "name": "Слаботочка/смарт-дом",
       "slug": "low-voltage",
       "subcategories": [
-        { "id": "1401", "name": "Wi-Fi/сети", "slug": "wifi" },
-        { "id": "1402", "name": "Видеонаблюдение/домофон", "slug": "cctv" },
-        { "id": "1403", "name": "Умный дом/датчики", "slug": "smarthome" }
+        {
+          "id": 1401,
+          "name": "Wi-Fi/сети",
+          "slug": "wifi"
+        },
+        {
+          "id": 1402,
+          "name": "Видеонаблюдение/домофон",
+          "slug": "cctv"
+        },
+        {
+          "id": 1403,
+          "name": "Умный дом/датчики",
+          "slug": "smarthome"
+        }
       ]
     },
     {
-      "id": "15",
+      "id": 15,
       "name": "Клининг",
       "slug": "cleaning",
       "subcategories": [
-        { "id": "1501", "name": "Генеральная уборка", "slug": "general" },
-        { "id": "1502", "name": "После ремонта", "slug": "post-renovation" },
-        { "id": "1503", "name": "Мытьё окон", "slug": "windows" },
-        { "id": "1504", "name": "Химчистка мебели/ковров", "slug": "dry-clean" }
+        {
+          "id": 1501,
+          "name": "Генеральная уборка",
+          "slug": "general"
+        },
+        {
+          "id": 1502,
+          "name": "После ремонта",
+          "slug": "post-renovation"
+        },
+        {
+          "id": 1503,
+          "name": "Мытьё окон",
+          "slug": "windows"
+        },
+        {
+          "id": 1504,
+          "name": "Химчистка мебели/ковров",
+          "slug": "dry-clean"
+        }
       ]
     },
     {
-      "id": "16",
+      "id": 16,
       "name": "Ремонт техники",
       "slug": "appliances",
       "subcategories": [
-        { "id": "1601", "name": "Стиральные машины", "slug": "washers" },
-        { "id": "1602", "name": "Холодильники", "slug": "fridges" },
-        { "id": "1603", "name": "Плиты/духовки", "slug": "cookers" }
+        {
+          "id": 1601,
+          "name": "Стиральные машины",
+          "slug": "washers"
+        },
+        {
+          "id": 1602,
+          "name": "Холодильники",
+          "slug": "fridges"
+        },
+        {
+          "id": 1603,
+          "name": "Плиты/духовки",
+          "slug": "cookers"
+        }
       ]
     },
     {
-      "id": "17",
+      "id": 17,
       "name": "Компьютерные услуги",
       "slug": "computer",
       "subcategories": [
-        { "id": "1701", "name": "Настройка Windows/ПО", "slug": "os" },
-        { "id": "1702", "name": "Ремонт ПК/ноутбуков", "slug": "repair" },
-        { "id": "1703", "name": "Сборка ПК/апгрейд", "slug": "build" }
+        {
+          "id": 1701,
+          "name": "Настройка Windows/ПО",
+          "slug": "os"
+        },
+        {
+          "id": 1702,
+          "name": "Ремонт ПК/ноутбуков",
+          "slug": "repair"
+        },
+        {
+          "id": 1703,
+          "name": "Сборка ПК/апгрейд",
+          "slug": "build"
+        }
       ]
     },
     {
-      "id": "18",
+      "id": 18,
       "name": "Автосервис",
       "slug": "auto",
       "subcategories": [
-        { "id": "1801", "name": "Мотор/ходовая", "slug": "engine" },
-        { "id": "1802", "name": "Шиномонтаж", "slug": "tires" },
-        { "id": "1803", "name": "Автоэлектрик", "slug": "auto-electric" },
-        { "id": "1804", "name": "Диагностика", "slug": "diagnostics" }
+        {
+          "id": 1801,
+          "name": "Мотор/ходовая",
+          "slug": "engine"
+        },
+        {
+          "id": 1802,
+          "name": "Шиномонтаж",
+          "slug": "tires"
+        },
+        {
+          "id": 1803,
+          "name": "Автоэлектрик",
+          "slug": "auto-electric"
+        },
+        {
+          "id": 1804,
+          "name": "Диагностика",
+          "slug": "diagnostics"
+        }
       ]
     },
     {
-      "id": "19",
+      "id": 19,
       "name": "Переезды/доставка",
       "slug": "moving",
       "subcategories": [
-        { "id": "1901", "name": "Грузчики", "slug": "movers" },
-        { "id": "1902", "name": "Грузовое такси", "slug": "cargo-taxi" },
-        { "id": "1903", "name": "Упаковка/сборка", "slug": "pack" }
+        {
+          "id": 1901,
+          "name": "Грузчики",
+          "slug": "movers"
+        },
+        {
+          "id": 1902,
+          "name": "Грузовое такси",
+          "slug": "cargo-taxi"
+        },
+        {
+          "id": 1903,
+          "name": "Упаковка/сборка",
+          "slug": "pack"
+        }
       ]
     },
     {
-      "id": "20",
+      "id": 20,
       "name": "Красота и здоровье",
       "slug": "beauty",
       "subcategories": [
-        { "id": "2001", "name": "Парикмахер", "slug": "hair" },
-        { "id": "2002", "name": "Косметолог/маникюр", "slug": "cosmetology" },
-        { "id": "2003", "name": "Массажист", "slug": "massage" }
+        {
+          "id": 2001,
+          "name": "Парикмахер",
+          "slug": "hair"
+        },
+        {
+          "id": 2002,
+          "name": "Косметолог/маникюр",
+          "slug": "cosmetology"
+        },
+        {
+          "id": 2003,
+          "name": "Массажист",
+          "slug": "massage"
+        }
       ]
     },
     {
-      "id": "21",
+      "id": 21,
       "name": "Образование/репетиторы",
       "slug": "tutors",
       "subcategories": [
-        { "id": "2101", "name": "Математика/физика", "slug": "math" },
-        { "id": "2102", "name": "Иностранные языки", "slug": "languages" },
-        { "id": "2103", "name": "Программирование", "slug": "coding" }
+        {
+          "id": 2101,
+          "name": "Математика/физика",
+          "slug": "math"
+        },
+        {
+          "id": 2102,
+          "name": "Иностранные языки",
+          "slug": "languages"
+        },
+        {
+          "id": 2103,
+          "name": "Программирование",
+          "slug": "coding"
+        }
       ]
     },
     {
-      "id": "22",
+      "id": 22,
       "name": "Юристы/бухгалтерия",
       "slug": "legal-accounting",
       "subcategories": [
-        { "id": "2201", "name": "Юрист (семейные/недвиж.)", "slug": "lawyer" },
-        { "id": "2202", "name": "Бухгалтер/отчётность", "slug": "accounting" },
-        { "id": "2203", "name": "Регистрация ИП/ООО", "slug": "registration" }
+        {
+          "id": 2201,
+          "name": "Юрист (семейные/недвиж.)",
+          "slug": "lawyer"
+        },
+        {
+          "id": 2202,
+          "name": "Бухгалтер/отчётность",
+          "slug": "accounting"
+        },
+        {
+          "id": 2203,
+          "name": "Регистрация ИП/ООО",
+          "slug": "registration"
+        }
       ]
     },
     {
-      "id": "23",
+      "id": 23,
       "name": "Печать и реклама",
       "slug": "print-ads",
       "subcategories": [
-        { "id": "2301", "name": "Полиграфия/баннеры", "slug": "print" },
-        { "id": "2302", "name": "Наружная реклама", "slug": "outdoor" },
-        { "id": "2303", "name": "Сувенирка/брендирование", "slug": "souvenir" }
+        {
+          "id": 2301,
+          "name": "Полиграфия/баннеры",
+          "slug": "print"
+        },
+        {
+          "id": 2302,
+          "name": "Наружная реклама",
+          "slug": "outdoor"
+        },
+        {
+          "id": 2303,
+          "name": "Сувенирка/брендирование",
+          "slug": "souvenir"
+        }
       ]
     },
     {
-      "id": "24",
+      "id": 24,
       "name": "Ландшафт/сад",
       "slug": "landscape",
       "subcategories": [
-        { "id": "2401", "name": "Озеленение/газон", "slug": "lawn" },
-        { "id": "2402", "name": "Автополив/дренаж", "slug": "irrigation" },
-        { "id": "2403", "name": "Дорожки/бордюры", "slug": "paths" }
+        {
+          "id": 2401,
+          "name": "Озеленение/газон",
+          "slug": "lawn"
+        },
+        {
+          "id": 2402,
+          "name": "Автополив/дренаж",
+          "slug": "irrigation"
+        },
+        {
+          "id": 2403,
+          "name": "Дорожки/бордюры",
+          "slug": "paths"
+        }
       ]
     },
     {
-      "id": "25",
+      "id": 25,
       "name": "Замки/сейфы",
       "slug": "locksmith",
       "subcategories": [
-        { "id": "2501", "name": "Вскрытие/замена замков", "slug": "locks" },
-        { "id": "2502", "name": "Сейфы/дверные системы", "slug": "safes" }
+        {
+          "id": 2501,
+          "name": "Вскрытие/замена замков",
+          "slug": "locks"
+        },
+        {
+          "id": 2502,
+          "name": "Сейфы/дверные системы",
+          "slug": "safes"
+        }
       ]
     },
     {
-      "id": "26",
+      "id": 26,
       "name": "Дезинсекция/дератизация",
       "slug": "pest-control",
       "subcategories": [
-        { "id": "2601", "name": "Тараканы/клопы", "slug": "insects" },
-        { "id": "2602", "name": "Грызуны", "slug": "rodents" }
+        {
+          "id": 2601,
+          "name": "Тараканы/клопы",
+          "slug": "insects"
+        },
+        {
+          "id": 2602,
+          "name": "Грызуны",
+          "slug": "rodents"
+        }
       ]
     },
     {
-      "id": "27",
+      "id": 27,
       "name": "Прачечные/химчистка",
       "slug": "laundry",
       "subcategories": [
-        { "id": "2701", "name": "Стирка/глажка", "slug": "wash" },
-        { "id": "2702", "name": "Химчистка одежды", "slug": "dryclean" }
+        {
+          "id": 2701,
+          "name": "Стирка/глажка",
+          "slug": "wash"
+        },
+        {
+          "id": 2702,
+          "name": "Химчистка одежды",
+          "slug": "dryclean"
+        }
       ]
     }
   ],
   "faqs": [
-    { "id": 1, "question": "После регистрации не получил письмо. Что делать?", "answer": "Проверьте папку «Спам». Если письма нет — войдите по номеру телефона или свяжитесь с поддержкой." },
-    { "id": 2, "question": "Не помню пароль", "answer": "Используйте восстановление пароля по email или телефону." },
-    { "id": 3, "question": "Как изменить пароль?", "answer": "Зайдите в профиль → Настройки → Безопасность." },
-    { "id": 4, "question": "В каких городах доступны мастера?", "answer": "Во всех крупных городах Таджикистана. Список городов есть на главной." }
+    {
+      "id": 1,
+      "question": "После регистрации не получил письмо. Что делать?",
+      "answer": "Проверьте папку «Спам». Если письма нет — войдите по номеру телефона или свяжитесь с поддержкой."
+    },
+    {
+      "id": 2,
+      "question": "Не помню пароль",
+      "answer": "Используйте восстановление пароля по email или телефону."
+    },
+    {
+      "id": 3,
+      "question": "Как изменить пароль?",
+      "answer": "Зайдите в профиль → Настройки → Безопасность."
+    },
+    {
+      "id": 4,
+      "question": "В каких городах доступны мастера?",
+      "answer": "Во всех крупных городах Таджикистана. Список городов есть на главной."
+    }
   ],
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "email": "majid@example.com",
       "password": "$2b$10$gm.7W8BQfFYRpK7OHC25ceT9lyQn86TO95q8obj9r0uppTS28gWkO",
       "name": "Маджид",
       "phone": "+992900800604",
-      "cityId": "1",
+      "cityId": 1,
       "role": "user",
       "favorites": [
-        { "targetType": "master", "targetId": "101" },
-        { "targetType": "company", "targetId": "201" }
+        {
+          "targetType": "master",
+          "targetId": 101
+        },
+        {
+          "targetType": "company",
+          "targetId": 201
+        }
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "email": "firuz@example.com",
       "password": "$2b$10$7tlZsaMJzvqSj0.xK20AHefURTn.okT6RcyCaDKa2mLvYwOKJP51m",
       "name": "Фируз",
       "phone": "+992900000002",
-      "cityId": "2",
+      "cityId": 2,
       "role": "master",
       "favorites": []
     },
     {
-      "id": "3",
+      "id": 3,
       "email": "tamir@example.com",
       "password": "$2b$10$k8Jb8l8tsDDjGxTnEFNKYOHJVkjzQj0Tck/g07ZxkJ/lUWmrLB2le",
       "name": "Tamir Service",
-      "cityId": "1",
+      "cityId": 1,
       "role": "company",
       "favorites": []
     },
     {
-      "id": "4",
+      "id": 4,
       "email": "admin@example.com",
       "password": "$2b$10$/76bOCUQFb1j9KBm4R8xreaugoISeT88fIgaS2YeVeFUcOOp3HLpm",
       "name": "Администратор",
@@ -335,33 +737,99 @@
       "favorites": []
     },
     {
-      "id": "5",
+      "id": 5,
       "email": "majidmuminzoda@gmail.com",
       "password": "$2b$10$s83mEbqDou7v0yfAU.wmceFVtcTH0.p5QOPivoe/BB2q.ENKycEHK",
       "name": "Abdumajid",
       "phone": "900800604",
-      "cityId": "1",
+      "cityId": 1,
       "role": "user",
       "favorites": []
     },
     {
-      "id": "6",
+      "id": 6,
       "email": "majid88@gmail.com",
       "password": "$2b$10$N5ZSTa/3o1bMQ5tzniropuiZwN4.A.0JD7TZ5nUkljur3iBXMEi0C",
       "name": "Sobir",
       "phone": "900888444",
-      "cityId": "1",
+      "cityId": 1,
       "role": "user",
+      "favorites": []
+    },
+    {
+      "id": 1756919988258,
+      "email": "alijon7@gmail.com",
+      "password": "$2b$10$scKYWKvQlGQRDgtfaD3aVOLsCbglzDX5AC.JYfVH8.ZFcF4wMptpq",
+      "name": "Ali",
+      "role": "user",
+      "cityId": 1,
+      "favorites": []
+    },
+    {
+      "id": 1756920051607,
+      "email": "komil@gmail.com",
+      "password": "$2b$10$uMNujcaMCXv5MSzL0P3rPuYl3Z21u5hlKf2p2QCmfloFdpZhtLOAm",
+      "name": "komil",
+      "role": "user",
+      "cityId": 1,
+      "favorites": []
+    },
+    {
+      "id": 1756921157112,
+      "email": "ik@gmail.com",
+      "password": "$2b$10$wxfrBNU5qJpjI1BkfJUuuecdXF53DzwInsPL13s95XbsKHjQITVki",
+      "name": "ilhom",
+      "role": "user",
+      "cityId": 1,
+      "favorites": []
+    },
+    {
+      "id": 1756921817512,
+      "email": "soleh2211@gmail.com",
+      "password": "$2b$10$rcSrf11JzOy7.w1esi1n0OnY0jHgnXVkrZVYSmhi3Lnyee6D3W.yC",
+      "name": "Soleh",
+      "role": "user",
+      "cityId": 1,
+      "favorites": []
+    },
+    {
+      "id": 1757091467965,
+      "email": "jura22@gmail.com",
+      "password": "$2b$10$E8HfbYiXPZ2heqNoOlShGuBInzMHVTuNwlLX9q.FMVhOEErj8GeE2",
+      "name": "jura",
+      "role": "user",
+      "cityId": 1,
+      "favorites": []
+    },
+    {
+      "id": 1757092032946,
+      "email": "bobi@gmail.com",
+      "password": "$2b$10$5zK4onA1PFgP3Y/wbZWwrOb8VTMsE52LgLfZ57hW5/1OBvhCPM4ve",
+      "name": "bobi",
+      "role": "user",
+      "cityId": 1,
+      "favorites": []
+    },
+    {
+      "id": 1757092402753,
+      "email": "koma23@gmail.com",
+      "password": "$2b$10$oPZ5yPi3djgJelO8nOgzVu3x1WrRrshfVNofU.2eBcxkvyWP6nnWe",
+      "name": "Komil",
+      "role": "user",
+      "cityId": 1,
       "favorites": []
     }
   ],
   "masters": [
     {
-      "id": "104",
+      "id": 104,
       "fullName": "Саид Рахимов",
-      "avatar": "/hero/red8.png",
-      "categoryId": "4",
-      "subCategoryIds": ["401", "402"],
+      "avatar": "https://ui-avatars.com/api/?name=Саид+Рахимов&background=random&size=256",
+      "categoryId": 4,
+      "subCategoryIds": [
+        401,
+        402
+      ],
       "rating": 4.7,
       "reviewsCount": 3,
       "experienceYears": 6,
@@ -369,11 +837,13 @@
       "priceUnit": "сомони/час",
       "completed": 74,
       "verified": true,
-      "badges": ["Гарантия"],
+      "badges": [
+        "Гарантия"
+      ],
       "responseRate": 96,
       "lastActive": "2025-08-29T18:10:00Z",
       "phone": "+992900000004",
-      "cityId": "1",
+      "cityId": 1,
       "about": "Маляр. Шпатлевка, покраска, аккуратно, быстро.",
       "photos": [
         "https://picsum.photos/seed/master-104-1/1200/800",
@@ -382,11 +852,14 @@
       ]
     },
     {
-      "id": "105",
+      "id": 105,
       "fullName": "Бехруз Юсупов",
-      "avatar": "/hero/red8.png",
-      "categoryId": "5",
-      "subCategoryIds": ["501", "503"],
+      "avatar": "https://ui-avatars.com/api/?name=Бехруз+Юсупов&background=random&size=256",
+      "categoryId": 5,
+      "subCategoryIds": [
+        501,
+        503
+      ],
       "rating": 4.6,
       "reviewsCount": 2,
       "experienceYears": 5,
@@ -394,11 +867,13 @@
       "priceUnit": "сомони/час",
       "completed": 62,
       "verified": true,
-      "badges": ["Безопасная сделка"],
+      "badges": [
+        "Безопасная сделка"
+      ],
       "responseRate": 94,
       "lastActive": "2025-08-29T17:40:00Z",
       "phone": "+992900000005",
-      "cityId": "2",
+      "cityId": 2,
       "about": "ГКЛ — перегородки, ниши, арки. Чисто и в срок.",
       "photos": [
         "https://picsum.photos/seed/master-105-1/1200/800",
@@ -406,11 +881,14 @@
       ]
     },
     {
-      "id": "106",
+      "id": 106,
       "fullName": "Насим Ахмадов",
-      "avatar": "/hero/red8.png",
-      "categoryId": "6",
-      "subCategoryIds": ["601", "603"],
+      "avatar": "https://ui-avatars.com/api/?name=Насим+Ахмадов&background=random&size=256",
+      "categoryId": 6,
+      "subCategoryIds": [
+        601,
+        603
+      ],
       "rating": 4.8,
       "reviewsCount": 4,
       "experienceYears": 8,
@@ -418,11 +896,13 @@
       "priceUnit": "сомони/час",
       "completed": 91,
       "verified": true,
-      "badges": ["Топ-мастер"],
+      "badges": [
+        "Топ-мастер"
+      ],
       "responseRate": 97,
       "lastActive": "2025-08-29T19:05:00Z",
       "phone": "+992900000006",
-      "cityId": "1",
+      "cityId": 1,
       "about": "Полы: стяжка, ламинат, паркет. Ровно и быстро.",
       "photos": [
         "https://picsum.photos/seed/master-106-1/1200/800",
@@ -431,11 +911,14 @@
       ]
     },
     {
-      "id": "107",
+      "id": 107,
       "fullName": "Шохрух Джураев",
-      "avatar": "/hero/red8.png",
-      "categoryId": "7",
-      "subCategoryIds": ["701", "702"],
+      "avatar": "https://ui-avatars.com/api/?name=Шохрух+Джураев&background=random&size=256",
+      "categoryId": 7,
+      "subCategoryIds": [
+        701,
+        702
+      ],
       "rating": 4.5,
       "reviewsCount": 3,
       "experienceYears": 6,
@@ -447,7 +930,7 @@
       "responseRate": 92,
       "lastActive": "2025-08-29T14:55:00Z",
       "phone": "+992900000007",
-      "cityId": "2",
+      "cityId": 2,
       "about": "Окна и двери: монтаж и регулировка ПВХ/Al.",
       "photos": [
         "https://picsum.photos/seed/master-107-1/1200/800",
@@ -455,11 +938,14 @@
       ]
     },
     {
-      "id": "108",
+      "id": 108,
       "fullName": "Фаррух Хашимов",
-      "avatar": "/hero/red8.png",
-      "categoryId": "11",
-      "subCategoryIds": ["1101", "1102"],
+      "avatar": "https://ui-avatars.com/api/?name=Фаррух+Хашимов&background=random&size=256",
+      "categoryId": 11,
+      "subCategoryIds": [
+        1101,
+        1102
+      ],
       "rating": 4.7,
       "reviewsCount": 5,
       "experienceYears": 7,
@@ -467,11 +953,13 @@
       "priceUnit": "сомони/час",
       "completed": 88,
       "verified": true,
-      "badges": ["Гарантия"],
+      "badges": [
+        "Гарантия"
+      ],
       "responseRate": 98,
       "lastActive": "2025-08-29T09:25:00Z",
       "phone": "+992900000008",
-      "cityId": "1",
+      "cityId": 1,
       "about": "Кондиционеры: монтаж/демонтаж, заправка, сервис.",
       "photos": [
         "https://picsum.photos/seed/master-108-1/1200/800",
@@ -480,11 +968,14 @@
       ]
     },
     {
-      "id": "109",
+      "id": 109,
       "fullName": "Далер Исмоилов",
-      "avatar": "/hero/red8.png",
-      "categoryId": "12",
-      "subCategoryIds": ["1201", "1203"],
+      "avatar": "https://ui-avatars.com/api/?name=Далер+Исмоилов&background=random&size=256",
+      "categoryId": 12,
+      "subCategoryIds": [
+        1201,
+        1203
+      ],
       "rating": 4.8,
       "reviewsCount": 4,
       "experienceYears": 9,
@@ -492,11 +983,14 @@
       "priceUnit": "сомони/час",
       "completed": 105,
       "verified": true,
-      "badges": ["Топ-мастер", "Гарантия"],
+      "badges": [
+        "Топ-мастер",
+        "Гарантия"
+      ],
       "responseRate": 95,
       "lastActive": "2025-08-28T18:30:00Z",
       "phone": "+992900000009",
-      "cityId": "3",
+      "cityId": 3,
       "about": "Отопление и водоснабжение. Котлы, коллекторы, тёплый пол.",
       "photos": [
         "https://picsum.photos/seed/master-109-1/1200/800",
@@ -504,11 +998,14 @@
       ]
     },
     {
-      "id": "110",
+      "id": 110,
       "fullName": "Зубайдулло Мирзоев",
-      "avatar": "/hero/red8.png",
-      "categoryId": "8",
-      "subCategoryIds": ["801", "803"],
+      "avatar": "https://ui-avatars.com/api/?name=Зубайдулло+Мирзоев&background=random&size=256",
+      "categoryId": 8,
+      "subCategoryIds": [
+        801,
+        803
+      ],
       "rating": 4.6,
       "reviewsCount": 2,
       "experienceYears": 10,
@@ -520,7 +1017,7 @@
       "responseRate": 90,
       "lastActive": "2025-08-28T15:40:00Z",
       "phone": "+992900000010",
-      "cityId": "2",
+      "cityId": 2,
       "about": "Сварка/металлоконструкции: ворота, решётки, ремонт.",
       "photos": [
         "https://picsum.photos/seed/master-110-1/1200/800",
@@ -528,11 +1025,14 @@
       ]
     },
     {
-      "id": "111",
+      "id": 111,
       "fullName": "Кароматулло Абдуллаев",
-      "avatar": "/hero/red8.png",
-      "categoryId": "9",
-      "subCategoryIds": ["901", "903"],
+      "avatar": "https://ui-avatars.com/api/?name=Кароматулло+Абдуллаев&background=random&size=256",
+      "categoryId": 9,
+      "subCategoryIds": [
+        901,
+        903
+      ],
       "rating": 4.7,
       "reviewsCount": 3,
       "experienceYears": 11,
@@ -540,11 +1040,13 @@
       "priceUnit": "сомони/час",
       "completed": 120,
       "verified": true,
-      "badges": ["Гарантия"],
+      "badges": [
+        "Гарантия"
+      ],
       "responseRate": 93,
       "lastActive": "2025-08-29T07:50:00Z",
       "phone": "+992900000011",
-      "cityId": "1",
+      "cityId": 1,
       "about": "Кровля и фасад: монтаж, утепление, ремонт протечек.",
       "photos": [
         "https://picsum.photos/seed/master-111-1/1200/800",
@@ -553,11 +1055,14 @@
       ]
     },
     {
-      "id": "112",
+      "id": 112,
       "fullName": "Зайнаб Шарипова",
-      "avatar": "/hero/red8.png",
-      "categoryId": "13",
-      "subCategoryIds": ["1301", "1303"],
+      "avatar": "https://ui-avatars.com/api/?name=Зайнаб+Шарипова&background=random&size=256",
+      "categoryId": 13,
+      "subCategoryIds": [
+        1301,
+        1303
+      ],
       "rating": 4.9,
       "reviewsCount": 6,
       "experienceYears": 8,
@@ -565,11 +1070,14 @@
       "priceUnit": "сомони/час",
       "completed": 140,
       "verified": true,
-      "badges": ["Топ-мастер", "Безопасная сделка"],
+      "badges": [
+        "Топ-мастер",
+        "Безопасная сделка"
+      ],
       "responseRate": 99,
       "lastActive": "2025-08-29T12:05:00Z",
       "phone": "+992900000012",
-      "cityId": "1",
+      "cityId": 1,
       "about": "Мебель и кухни: сборка, монтаж кухонь, фасады.",
       "photos": [
         "https://picsum.photos/seed/master-112-1/1200/800",
@@ -578,11 +1086,14 @@
       ]
     },
     {
-      "id": "113",
+      "id": 113,
       "fullName": "Мурод Алиев",
-      "avatar": "/hero/red8.png",
-      "categoryId": "10",
-      "subCategoryIds": ["1001", "1003"],
+      "avatar": "https://ui-avatars.com/api/?name=Мурод+Алиев&background=random&size=256",
+      "categoryId": 10,
+      "subCategoryIds": [
+        1001,
+        1003
+      ],
       "rating": 4.6,
       "reviewsCount": 2,
       "experienceYears": 7,
@@ -594,7 +1105,7 @@
       "responseRate": 91,
       "lastActive": "2025-08-28T10:40:00Z",
       "phone": "+992900000013",
-      "cityId": "3",
+      "cityId": 3,
       "about": "Потолки: натяжные, подсветка, карнизы.",
       "photos": [
         "https://picsum.photos/seed/master-113-1/1200/800",
@@ -602,11 +1113,14 @@
       ]
     },
     {
-      "id": "114",
+      "id": 114,
       "fullName": "Собирджон Ниёзов",
-      "avatar": "/hero/red8.png",
-      "categoryId": "17",
-      "subCategoryIds": ["1702", "1703"],
+      "avatar": "https://ui-avatars.com/api/?name=Собирджон+Ниёзов&background=random&size=256",
+      "categoryId": 17,
+      "subCategoryIds": [
+        1702,
+        1703
+      ],
       "rating": 4.8,
       "reviewsCount": 3,
       "experienceYears": 6,
@@ -614,11 +1128,13 @@
       "priceUnit": "сомони/час",
       "completed": 77,
       "verified": true,
-      "badges": ["Гарантия"],
+      "badges": [
+        "Гарантия"
+      ],
       "responseRate": 97,
       "lastActive": "2025-08-29T16:45:00Z",
       "phone": "+992900000014",
-      "cityId": "2",
+      "cityId": 2,
       "about": "Компьютерные услуги: ремонт и апгрейд ПК/ноутбуков.",
       "photos": [
         "https://picsum.photos/seed/master-114-1/1200/800",
@@ -627,11 +1143,14 @@
       ]
     },
     {
-      "id": "115",
+      "id": 115,
       "fullName": "Хуршед Курбанов",
-      "avatar": "/hero/red8.png",
-      "categoryId": "18",
-      "subCategoryIds": ["1801", "1804"],
+      "avatar": "https://ui-avatars.com/api/?name=Хуршед+Курбанов&background=random&size=256",
+      "categoryId": 18,
+      "subCategoryIds": [
+        1801,
+        1804
+      ],
       "rating": 4.5,
       "reviewsCount": 2,
       "experienceYears": 7,
@@ -643,7 +1162,7 @@
       "responseRate": 92,
       "lastActive": "2025-08-28T13:20:00Z",
       "phone": "+992900000015",
-      "cityId": "2",
+      "cityId": 2,
       "about": "Автосервис: мотор/ходовая, диагностика.",
       "photos": [
         "https://picsum.photos/seed/master-115-1/1200/800",
@@ -651,11 +1170,14 @@
       ]
     },
     {
-      "id": "116",
+      "id": 116,
       "fullName": "Мадина Рахматова",
-      "avatar": "/hero/red8.png",
-      "categoryId": "15",
-      "subCategoryIds": ["1501", "1503"],
+      "avatar": "https://ui-avatars.com/api/?name=Мадина+Рахматова&background=random&size=256",
+      "categoryId": 15,
+      "subCategoryIds": [
+        1501,
+        1503
+      ],
       "rating": 4.9,
       "reviewsCount": 5,
       "experienceYears": 5,
@@ -663,11 +1185,13 @@
       "priceUnit": "сомони/час",
       "completed": 132,
       "verified": true,
-      "badges": ["Топ-мастер"],
+      "badges": [
+        "Топ-мастер"
+      ],
       "responseRate": 98,
       "lastActive": "2025-08-29T08:35:00Z",
       "phone": "+992900000016",
-      "cityId": "1",
+      "cityId": 1,
       "about": "Клининг: генеральная уборка и мытьё окон, быстро и качественно.",
       "photos": [
         "https://picsum.photos/seed/master-116-1/1200/800",
@@ -675,11 +1199,14 @@
       ]
     },
     {
-      "id": "117",
+      "id": 117,
       "fullName": "Абдувахоб Холиков",
-      "avatar": "/hero/red8.png",
-      "categoryId": "14",
-      "subCategoryIds": ["1402", "1403"],
+      "avatar": "https://ui-avatars.com/api/?name=Абдувахоб+Холиков&background=random&size=256",
+      "categoryId": 14,
+      "subCategoryIds": [
+        1402,
+        1403
+      ],
       "rating": 4.7,
       "reviewsCount": 3,
       "experienceYears": 6,
@@ -687,11 +1214,13 @@
       "priceUnit": "сомони/час",
       "completed": 66,
       "verified": true,
-      "badges": ["Безопасная сделка"],
+      "badges": [
+        "Безопасная сделка"
+      ],
       "responseRate": 95,
       "lastActive": "2025-08-29T11:25:00Z",
       "phone": "+992900000017",
-      "cityId": "1",
+      "cityId": 1,
       "about": "Слаботочка/смарт-дом: видеонаблюдение, датчики, умные сценарии.",
       "photos": [
         "https://picsum.photos/seed/master-117-1/1200/800",
@@ -700,90 +1229,181 @@
       ]
     }
   ],
+  "threads": [
+    {
+      "id": "t-107-u1",
+      "masterId": "107",
+      "userId": "1",
+      "lastMessage": "Добрый вечер!",
+      "lastTs": "2025-09-13T19:05:00Z",
+      "unreadForUser": 0,
+      "unreadForMaster": 1
+    }
+  ],
+
+  "messages": [
+    {
+      "id": "m1",
+      "threadId": "t-107-u1",
+      "from": "user",
+      "text": "Здравствуйте!",
+      "createdAt": "2025-09-13T19:00:00Z"
+    },
+    {
+      "id": "m2",
+      "threadId": "t-107-u1",
+      "from": "master",
+      "text": "Добрый вечер!",
+      "createdAt": "2025-09-13T19:05:00Z"
+    }
+  ],
   "companies": [
     {
-      "id": "201",
+      "id": 201,
       "name": "Tamir Service",
       "slug": "tamir-service",
       "logo": "/uploads/companies/tamir-service.png",
-      "categoryIds": ["1", "2", "4", "5"],
-      "subCategoryIds": ["101", "104", "201", "204", "401", "402", "501"],
+      "categoryIds": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "subCategoryIds": [
+        101,
+        104,
+        201,
+        204,
+        401,
+        402,
+        501
+      ],
       "rating": 4.7,
       "reviewsCount": 58,
       "completed": 310,
       "responseRate": 96,
       "lastActive": "2025-08-29T18:45:00Z",
-      "cityId": "1",
+      "cityId": 1,
       "address": "Душанбе, ул. Рудаки 25",
-      "phones": ["+992900111222", "+992900333444"],
-      "workHours": { "monFri": "09:00-19:00", "sat": "10:00-17:00", "sun": "выходной" },
-      "photos": ["/uploads/companies/tamir-1.jpg", "/uploads/companies/tamir-2.jpg"],
+      "phones": [
+        "+992900111222",
+        "+992900333444"
+      ],
+      "workHours": {
+        "monFri": "09:00-19:00",
+        "sat": "10:00-17:00",
+        "sun": "выходной"
+      },
+      "photos": [
+        "/uploads/companies/tamir-1.jpg",
+        "/uploads/companies/tamir-2.jpg"
+      ],
       "description": "Строительно-отделочные работы: сантехника, электрика, покраска, ГКЛ.",
       "portfolio": [
-        { "id": "p-201-1", "title": "Ремонт ванной", "image": "/uploads/portfolio/tamir-bath.jpg" },
-        { "id": "p-201-2", "title": "Покраска и обои", "image": "/uploads/portfolio/tamir-wall.jpg" }
+        {
+          "id": "p-201-1",
+          "title": "Ремонт ванной",
+          "image": "/uploads/portfolio/tamir-bath.jpg"
+        },
+        {
+          "id": "p-201-2",
+          "title": "Покраска и обои",
+          "image": "/uploads/portfolio/tamir-wall.jpg"
+        }
       ]
     },
     {
-      "id": "202",
+      "id": 202,
       "name": "CleanPro Tajikistan",
       "slug": "cleanpro",
       "logo": "/uploads/companies/cleanpro.png",
-      "categoryIds": ["15"],
-      "subCategoryIds": ["1501", "1502", "1503", "1504"],
+      "categoryIds": [
+        15
+      ],
+      "subCategoryIds": [
+        1501,
+        1502,
+        1503,
+        1504
+      ],
       "rating": 4.6,
       "reviewsCount": 41,
       "completed": 420,
       "responseRate": 97,
       "lastActive": "2025-08-29T08:30:00Z",
-      "cityId": "1",
+      "cityId": 1,
       "address": "Душанбе, пр. Сомони 12",
-      "phones": ["+992900555666"],
-      "workHours": { "monFri": "08:00-20:00", "sat": "09:00-18:00", "sun": "09:00-16:00" },
-      "photos": ["/uploads/companies/cleanpro-1.jpg"],
+      "phones": [
+        "+992900555666"
+      ],
+      "workHours": {
+        "monFri": "08:00-20:00",
+        "sat": "09:00-18:00",
+        "sun": "09:00-16:00"
+      },
+      "photos": [
+        "/uploads/companies/cleanpro-1.jpg"
+      ],
       "description": "Клининг квартир/офисов, после ремонта, мойка окон, химчистка."
     },
     {
-      "id": "203",
+      "id": 203,
       "name": "AutoMaster Khujand",
       "slug": "automaster-khujand",
       "logo": "/uploads/companies/automaster.png",
-      "categoryIds": ["18"],
-      "subCategoryIds": ["1801", "1802", "1803", "1804"],
+      "categoryIds": [
+        18
+      ],
+      "subCategoryIds": [
+        1801,
+        1802,
+        1803,
+        1804
+      ],
       "rating": 4.5,
       "reviewsCount": 33,
       "completed": 210,
       "responseRate": 93,
       "lastActive": "2025-08-28T17:20:00Z",
-      "cityId": "2",
+      "cityId": 2,
       "address": "Худжанд, ш. И.Сомони 4",
-      "phones": ["+992900777888"],
-      "workHours": { "monFri": "09:00-19:00", "sat": "09:00-17:00", "sun": "выходной" },
-      "photos": ["/uploads/companies/automaster-1.jpg"],
+      "phones": [
+        "+992900777888"
+      ],
+      "workHours": {
+        "monFri": "09:00-19:00",
+        "sat": "09:00-17:00",
+        "sun": "выходной"
+      },
+      "photos": [
+        "/uploads/companies/automaster-1.jpg"
+      ],
       "description": "Полный автосервис: мотор, подвеска, электрика, шиномонтаж."
     }
   ],
   "orders": [
     {
-      "id": "5001",
-      "customerId": "1",
-      "cityId": "1",
-      "categoryId": "1",
-      "subCategoryId": "103",
+      "id": 5001,
+      "customerId": 1,
+      "cityId": 1,
+      "categoryId": 1,
+      "subCategoryId": 103,
       "title": "Засор в кухонной раковине",
       "description": "Нужна чистка сифона и трубы. Срочно сегодня.",
-      "attachments": ["/uploads/orders/5001-1.jpg"],
+      "attachments": [
+        "/uploads/orders/5001-1.jpg"
+      ],
       "budget": 200,
       "offersCount": 2,
       "status": "new",
       "createdAt": "2025-08-27T10:00:00Z"
     },
     {
-      "id": "5002",
-      "customerId": "1",
-      "cityId": "1",
-      "categoryId": "2",
-      "subCategoryId": "204",
+      "id": 5002,
+      "customerId": 1,
+      "cityId": 1,
+      "categoryId": 2,
+      "subCategoryId": 204,
       "title": "Повесить 6 спотов и люстру",
       "description": "Потолок ГКЛ, нужна аккуратная установка с вырезом.",
       "attachments": [],
@@ -793,11 +1413,11 @@
       "createdAt": "2025-08-26T12:30:00Z"
     },
     {
-      "id": "5003",
-      "customerId": "2",
-      "cityId": "2",
-      "categoryId": "15",
-      "subCategoryId": "1502",
+      "id": 5003,
+      "customerId": 2,
+      "cityId": 2,
+      "categoryId": 15,
+      "subCategoryId": 1502,
       "title": "Уборка после ремонта 2-комн",
       "description": "Площадь ~65 м², пыль, окна, санузел.",
       "attachments": [],
@@ -809,10 +1429,10 @@
   ],
   "offers": [
     {
-      "id": "8001",
-      "orderId": "5001",
+      "id": 8001,
+      "orderId": 5001,
       "authorType": "master",
-      "authorId": "106",
+      "authorId": 106,
       "message": "Готов подъехать в течение часа. Работа ~40 минут.",
       "price": 220,
       "currency": "сомони",
@@ -820,10 +1440,10 @@
       "createdAt": "2025-08-27T10:20:00Z"
     },
     {
-      "id": "8002",
-      "orderId": "5001",
+      "id": 8002,
+      "orderId": 5001,
       "authorType": "company",
-      "authorId": "201",
+      "authorId": 201,
       "message": "Сделаем с гарантией, возможен безнал.",
       "price": 250,
       "currency": "сомони",
@@ -831,10 +1451,10 @@
       "createdAt": "2025-08-27T10:30:00Z"
     },
     {
-      "id": "8003",
-      "orderId": "5002",
+      "id": 8003,
+      "orderId": 5002,
       "authorType": "master",
-      "authorId": "104",
+      "authorId": 104,
       "message": "Есть опыт в ГКЛ, привезу инструмент.",
       "price": 480,
       "currency": "сомони",
@@ -844,20 +1464,20 @@
   ],
   "reviews": [
     {
-      "id": "9001",
+      "id": 9001,
       "targetType": "master",
-      "targetId": "104",
-      "authorUserId": "1",
+      "targetId": 104,
+      "authorUserId": 1,
       "rating": 5,
       "text": "Шпатлевка и покраска — аккуратно, быстро.",
       "createdAt": "2025-08-28T12:00:00Z",
       "photos": []
     },
     {
-      "id": "9002",
+      "id": 9002,
       "targetType": "company",
-      "targetId": "201",
-      "authorUserId": "2",
+      "targetId": 201,
+      "authorUserId": 2,
       "rating": 4,
       "text": "Приехали вовремя, сделали с гарантией.",
       "createdAt": "2025-08-27T09:30:00Z",
@@ -865,15 +1485,27 @@
     }
   ],
   "comments": [
-    { "id": "9101", "reviewId": "9001", "userId": "2", "text": "Тоже вызывал — ок", "createdAt": "2025-08-29T15:00:00Z" },
-    { "id": "9102", "reviewId": "9002", "userId": "3", "text": "Подтверждаю", "createdAt": "2025-08-29T11:00:00Z" }
+    {
+      "id": 9101,
+      "reviewId": 9001,
+      "userId": 2,
+      "text": "Тоже вызывал — ок",
+      "createdAt": "2025-08-29T15:00:00Z"
+    },
+    {
+      "id": 9102,
+      "reviewId": 9002,
+      "userId": 3,
+      "text": "Подтверждаю",
+      "createdAt": "2025-08-29T11:00:00Z"
+    }
   ],
   "services": [
     {
       "id": "leak-fix",
       "category": "Сантехника",
-      "categoryId": "1",
-      "subCategoryId": "102",
+      "categoryId": 1,
+      "subCategoryId": 102,
       "title": "Устранить течь",
       "subtitle": "(1 точка)",
       "price": 150,
@@ -883,8 +1515,8 @@
     {
       "id": "install-plumbing",
       "category": "Сантехника",
-      "categoryId": "1",
-      "subCategoryId": "101",
+      "categoryId": 1,
+      "subCategoryId": 101,
       "title": "Установить сантехнику (под ключ)",
       "subtitle": "(1 точка)",
       "price": 250,
@@ -894,8 +1526,8 @@
     {
       "id": "pipe-clean",
       "category": "Сантехника",
-      "categoryId": "1",
-      "subCategoryId": "103",
+      "categoryId": 1,
+      "subCategoryId": 103,
       "title": "Чистка засора",
       "subtitle": "раковина/сифон",
       "price": 120,
@@ -905,8 +1537,8 @@
     {
       "id": "electric-wiring",
       "category": "Электрика",
-      "categoryId": "2",
-      "subCategoryId": "201",
+      "categoryId": 2,
+      "subCategoryId": 201,
       "title": "Монтаж проводки",
       "subtitle": "до 10 м²",
       "price": 300,
@@ -916,8 +1548,8 @@
     {
       "id": "light-install",
       "category": "Электрика",
-      "categoryId": "2",
-      "subCategoryId": "204",
+      "categoryId": 2,
+      "subCategoryId": 204,
       "title": "Установка люстры/светильника",
       "subtitle": "(1 шт.)",
       "price": 120,
@@ -927,8 +1559,8 @@
     {
       "id": "rcd-install",
       "category": "Электрика",
-      "categoryId": "2",
-      "subCategoryId": "205",
+      "categoryId": 2,
+      "subCategoryId": 205,
       "title": "Установка УЗО/дифавтомата",
       "subtitle": "(1 линия)",
       "price": 180,
@@ -938,8 +1570,8 @@
     {
       "id": "drywall-wall",
       "category": "ГКЛ и перегородки",
-      "categoryId": "5",
-      "subCategoryId": "501",
+      "categoryId": 5,
+      "subCategoryId": 501,
       "title": "Каркас и обшивка ГКЛ",
       "subtitle": "стена 3 м²",
       "price": 260,
@@ -949,8 +1581,8 @@
     {
       "id": "drywall-partition",
       "category": "ГКЛ и перегородки",
-      "categoryId": "5",
-      "subCategoryId": "502",
+      "categoryId": 5,
+      "subCategoryId": 502,
       "title": "Сделать перегородку",
       "subtitle": "за 1 пог. м",
       "price": 220,
@@ -960,8 +1592,8 @@
     {
       "id": "paint-walls",
       "category": "Малярные работы",
-      "categoryId": "4",
-      "subCategoryId": "401",
+      "categoryId": 4,
+      "subCategoryId": 401,
       "title": "Покраска стен",
       "subtitle": "за 10 м²",
       "price": 200,
@@ -971,8 +1603,8 @@
     {
       "id": "putty-level",
       "category": "Малярные работы",
-      "categoryId": "4",
-      "subCategoryId": "402",
+      "categoryId": 4,
+      "subCategoryId": 402,
       "title": "Шпатлевка/выравнивание",
       "subtitle": "за 10 м²",
       "price": 220,
@@ -982,8 +1614,8 @@
     {
       "id": "floor-laminate",
       "category": "Полы",
-      "categoryId": "6",
-      "subCategoryId": "601",
+      "categoryId": 6,
+      "subCategoryId": 601,
       "title": "Укладка ламината",
       "subtitle": "за 1 м²",
       "price": 80,
@@ -993,8 +1625,8 @@
     {
       "id": "window-reg",
       "category": "Окна и двери",
-      "categoryId": "7",
-      "subCategoryId": "702",
+      "categoryId": 7,
+      "subCategoryId": 702,
       "title": "Регулировка окна ПВХ",
       "subtitle": "(1 створка)",
       "price": 100,
@@ -1004,8 +1636,8 @@
     {
       "id": "door-install",
       "category": "Окна и двери",
-      "categoryId": "7",
-      "subCategoryId": "703",
+      "categoryId": 7,
+      "subCategoryId": 703,
       "title": "Монтаж межкомнатной двери",
       "subtitle": "(1 шт.)",
       "price": 350,
@@ -1015,8 +1647,8 @@
     {
       "id": "kitchen-mount",
       "category": "Мебель и кухни",
-      "categoryId": "13",
-      "subCategoryId": "1303",
+      "categoryId": 13,
+      "subCategoryId": 1303,
       "title": "Монтаж кухни",
       "subtitle": "пог. метр",
       "price": 420,

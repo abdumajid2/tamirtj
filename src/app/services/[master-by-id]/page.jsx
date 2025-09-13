@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
   LuBadgeCheck, LuChevronLeft, LuChevronRight, LuMapPin, LuPhone,
@@ -38,80 +38,49 @@ function Chip({ children }) {
 }
 
 export default function MasterProfilePage() {
-  const params = useParams();
+  const { id } = useParams();
   const router = useRouter();
 
-  // маршрут /masters/[id]
-  const rawId =
-    params?.id ??
-    params?.masterId ??
-    params?.masterID ??
-    params?.["master-id"] ??
-    params?.["masterId"] ??
-    params?.["masterID"];
-  const id = Array.isArray(rawId) ? rawId[0] : rawId;
-  console.log("params=", params, "id=", id);
-  
-  const { data: master, isLoading, isError } = useGetMasterByIdQuery(id, { skip: !id });
-  const { data: categories = [] } = useGetCategoriesQuery(undefined, { skip: !id });
-  const { data: reviews = [] } = useGetMasterReviewsQuery(id, { skip: !id });
-  const { data: services = [] } = useGetServicesQuery(undefined, { skip: !id });
-  
-  const cat = useMemo(
-    () => categories.find((c) => String(c.id) === String(master?.categoryId)),
-    [categories, master]
-  );
-  
+  const { data: master, isLoading, isError } = useGetMasterByIdQuery(id);
+  const { data: categories = [] } = useGetCategoriesQuery();
+  const { data: reviews = [] } = useGetMasterReviewsQuery(id);
+  const { data: services = [] } = useGetServicesQuery();
+
+  const cat = useMemo(() => categories.find(c => String(c.id) === String(master?.categoryId)), [categories, master]);
   const subNames = useMemo(() => {
     if (!master?.subCategoryIds || !cat?.subcategories) return [];
-    const dict = Object.fromEntries(cat.subcategories.map((s) => [String(s.id), s.name]));
-    return (master.subCategoryIds || [])
-    .map((x) => dict[String(x)])
-    .filter(Boolean);
+    const dict = Object.fromEntries(cat.subcategories.map(s => [String(s.id), s.name]));
+    return (master.subCategoryIds || []).map(x => dict[String(x)]).filter(Boolean);
   }, [master, cat]);
-  
+
   const catServices = useMemo(() => {
     if (!master?.categoryId) return [];
-    return services
-    .filter((s) => String(s.categoryId) === String(master.categoryId))
-    .slice(0, 8);
+    return services.filter(s => String(s.categoryId) === String(master.categoryId))
+                   .slice(0, 8);
   }, [services, master]);
-  
+
   const photos = master?.photos || [];
+
   const [tab, setTab] = useState("info"); // info | reviews | photos
-  
-  useEffect(() => {
-    if (!id) return;
-    fetch(`http://localhost:4000/masters/${id}`)
-      .then((r) => r.json())
-      .then((d) => console.log("plain fetch master=", d))
-      .catch(console.error);
-  }, [id]);
-  // === Скелетон ===
-  if (!id || isLoading) {
+
+  if (isLoading) {
     return (
       <section className="max-w-6xl mx-auto p-4">
         <div className="h-8 w-44 bg-gray-100 rounded mb-4 animate-pulse" />
         <div className="rounded-2xl border bg-white p-4 shadow animate-pulse">
           <div className="h-32 bg-gray-100 rounded" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="h-24 bg-gray-100 rounded" />
-            ))}
+            {Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-24 bg-gray-100 rounded" />)}
           </div>
         </div>
       </section>
     );
   }
-  
-  // === 404 ===
-  if (isError || !master?.id) {
+
+  if (isError || !master) {
     return (
       <section className="max-w-4xl mx-auto p-4">
-        <button
-          onClick={() => router.back()}
-          className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
-          >
+        <button onClick={() => router.back()} className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900">
           <LuChevronLeft /> Назад
         </button>
         <div className="mt-6 rounded-xl border bg-white p-6 text-center">
@@ -120,19 +89,14 @@ export default function MasterProfilePage() {
       </section>
     );
   }
-  
+
   return (
     <section className="max-w-6xl mx-auto p-4 sm:p-6">
-      {/* Хедер */}
+      {/* Хедер: аватар + имя + рейтинг + кнопки */}
       <div className="rounded-3xl bg-white border border-gray-200 shadow-sm p-4 sm:p-6">
         <div className="flex items-start gap-4">
           <div className="relative w-20 h-20 rounded-2xl overflow-hidden border flex-shrink-0">
-            <Image
-              src={master.avatar || "/placeholder.png"}
-              alt={master.fullName}
-              fill
-              className="object-cover"
-            />
+            <Image src={master.avatar || "/placeholder.png"} alt={master.fullName} fill className="object-cover" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -140,16 +104,12 @@ export default function MasterProfilePage() {
               <h1 className="text-xl sm:text-2xl font-bold text-gray-900 truncate">
                 {master.fullName}
               </h1>
-              {master.verified && (
-                <LuBadgeCheck className="text-emerald-500" title="Проверенный мастер" />
-              )}
+              {master.verified && <LuBadgeCheck className="text-emerald-500" title="Проверенный мастер" />}
             </div>
 
             <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-gray-600">
               <Stars rating={master.rating} />
-              <span className="font-medium text-gray-800">
-                {Number(master.rating).toFixed(1)}
-              </span>
+              <span className="font-medium text-gray-800">{Number(master.rating).toFixed(1)}</span>
               <span>•</span>
               <span>{master.reviewsCount} отзывов</span>
               {cat?.name && (
@@ -161,9 +121,7 @@ export default function MasterProfilePage() {
               {master.cityId && (
                 <>
                   <span>•</span>
-                  <span className="inline-flex items-center gap-1">
-                    <LuMapPin /> Город ID: {master.cityId}
-                  </span>
+                  <span className="inline-flex items-center gap-1"><LuMapPin /> Город ID: {master.cityId}</span>
                 </>
               )}
             </div>
@@ -171,17 +129,11 @@ export default function MasterProfilePage() {
             <div className="mt-2 flex flex-wrap gap-2">
               <Chip>Опыт: {master.experienceYears}+ лет</Chip>
               <Chip>Выполнено: {master.completed}</Chip>
-              <Chip className="!bg-emerald-50 !text-emerald-700">
-                Отклик: {master.responseRate}%
-              </Chip>
+              <Chip className="!bg-emerald-50 !text-emerald-700">Отклик: {master.responseRate}%</Chip>
               {master.badges?.includes("Гарантия") && (
-                <Chip>
-                  <LuShieldCheck className="mr-1" /> Гарантия
-                </Chip>
+                <Chip><LuShieldCheck className="mr-1" /> Гарантия</Chip>
               )}
-              <Chip>
-                <LuClock3 className="mr-1" /> 24/7 Срочный вызов
-              </Chip>
+              <Chip><LuClock3 className="mr-1" /> 24/7 Срочный вызов</Chip>
             </div>
           </div>
 
@@ -195,7 +147,7 @@ export default function MasterProfilePage() {
           </a>
         </div>
 
-        {/* мобильная кнопка */}
+        {/* быстрые кнопки под хедером (мобайл) */}
         <div className="mt-4 sm:hidden">
           <a
             href={`tel:${master.phone || ""}`}
@@ -215,7 +167,7 @@ export default function MasterProfilePage() {
             {[
               { key: "info", label: "Информация" },
               { key: "reviews", label: `Отзывы (${reviews.length})` },
-              { key: "photos", label: `Фото работ (${(master.photos || []).length})` },
+              { key: "photos", label: `Фото работ (${photos.length})` },
             ].map((t) => {
               const active = t.key === tab;
               return (
@@ -224,18 +176,13 @@ export default function MasterProfilePage() {
                   onClick={() => setTab(t.key)}
                   className={[
                     "relative py-3 px-4 text-sm font-semibold",
-                    active
-                      ? "text-[color:var(--brand-green)]"
-                      : "text-gray-600 hover:text-gray-900",
+                    active ? "text-[color:var(--brand-green)]" : "text-gray-600 hover:text-gray-900"
                   ].join(" ")}
                   style={{ ["--brand-green"]: BRAND.green }}
                 >
                   {t.label}
                   {active && (
-                    <span
-                      className="absolute left-0 right-0 -bottom-px h-[3px] rounded-full"
-                      style={{ background: BRAND.green }}
-                    />
+                    <span className="absolute left-0 right-0 -bottom-px h-[3px] rounded-full" style={{ background: BRAND.green }} />
                   )}
                 </button>
               );
@@ -252,55 +199,38 @@ export default function MasterProfilePage() {
           </div>
         </div>
 
-        {/* Контент табов */}
+        {/* TAB CONTENT */}
         <div className="p-4 sm:p-6">
           {tab === "info" && (
             <div className="grid md:grid-cols-3 gap-6">
               <div className="md:col-span-2 space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-900">О мастере</h3>
-                  <p className="mt-1 text-gray-700">
-                    {master.about || "Описание появится позже."}
-                  </p>
+                  <p className="mt-1 text-gray-700">{master.about || "Описание появится позже."}</p>
                 </div>
 
                 {subNames.length > 0 && (
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Специализация</h3>
                     <div className="flex flex-wrap gap-2">
-                      {subNames.map((s) => (
-                        <Chip key={s}>{s}</Chip>
-                      ))}
+                      {subNames.map((s) => <Chip key={s}>{s}</Chip>)}
                     </div>
                   </div>
                 )}
 
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    Прайс популярных работ
-                  </h3>
+                  <h3 className="font-semibold text-gray-900 mb-2">Прайс популярных работ</h3>
                   <div className="grid sm:grid-cols-2 gap-2">
                     {catServices.map((s) => (
-                      <div
-                        key={s.id}
-                        className="flex items-center text-sm bg-gray-50 rounded-lg px-3 py-2"
-                      >
+                      <div key={s.id} className="flex items-center text-sm bg-gray-50 rounded-lg px-3 py-2">
                         <span className="truncate">{s.title}</span>
                         <span className="flex-1 border-b border-dotted mx-2 opacity-50" />
-                        <span
-                          className="whitespace-nowrap font-semibold text-[color:var(--brand-green)]"
-                          style={{ ["--brand-green"]: BRAND.green }}
-                        >
-                          от {Number(s.price).toLocaleString("ru-RU")}{" "}
-                          {s.currency || "с."}
+                        <span className="whitespace-nowrap font-semibold text-[color:var(--brand-green)]" style={{ ["--brand-green"]: BRAND.green }}>
+                          от {Number(s.price).toLocaleString("ru-RU")} {s.currency || "с."}
                         </span>
                       </div>
                     ))}
-                    {catServices.length === 0 && (
-                      <div className="text-sm text-gray-500">
-                        Для этой категории пока нет прайса.
-                      </div>
-                    )}
+                    {catServices.length === 0 && <div className="text-sm text-gray-500">Для этой категории пока нет прайса.</div>}
                   </div>
                 </div>
               </div>
@@ -308,10 +238,7 @@ export default function MasterProfilePage() {
               <aside className="space-y-3">
                 <div className="rounded-2xl border p-4">
                   <div className="text-sm text-gray-500">Телефон</div>
-                  <a
-                    href={`tel:${master.phone || ""}`}
-                    className="mt-1 block text-lg font-bold text-gray-900"
-                  >
+                  <a href={`tel:${master.phone || ""}`} className="mt-1 block text-lg font-bold text-gray-900">
                     {master.phone || "—"}
                   </a>
                   <a
@@ -325,9 +252,7 @@ export default function MasterProfilePage() {
 
                 <div className="rounded-2xl border p-4">
                   <div className="text-sm text-gray-500">Активность</div>
-                  <div className="mt-1 text-gray-800">
-                    В сети: {new Date(master.lastActive).toLocaleString()}
-                  </div>
+                  <div className="mt-1 text-gray-800">В сети: {new Date(master.lastActive).toLocaleString()}</div>
                   <div className="mt-2 flex flex-wrap gap-2">
                     <Chip>24/7</Chip>
                     <Chip>Срочный выезд</Chip>
@@ -340,16 +265,12 @@ export default function MasterProfilePage() {
 
           {tab === "reviews" && (
             <div className="space-y-4">
-              {reviews.length === 0 && (
-                <div className="text-sm text-gray-500">Пока нет отзывов.</div>
-              )}
+              {reviews.length === 0 && <div className="text-sm text-gray-500">Пока нет отзывов.</div>}
               {reviews.map((r) => (
                 <div key={r.id} className="rounded-2xl border p-4">
                   <div className="flex items-center justify-between">
                     <Stars rating={r.rating} />
-                    <div className="text-xs text-gray-500">
-                      {new Date(r.createdAt).toLocaleDateString()}
-                    </div>
+                    <div className="text-xs text-gray-500">{new Date(r.createdAt).toLocaleDateString()}</div>
                   </div>
                   <p className="mt-2 text-gray-800">{r.text}</p>
                 </div>
@@ -359,15 +280,10 @@ export default function MasterProfilePage() {
 
           {tab === "photos" && (
             <>
-              {photos.length === 0 && (
-                <div className="text-sm text-gray-500">Фото пока нет.</div>
-              )}
+              {photos.length === 0 && <div className="text-sm text-gray-500">Фото пока нет.</div>}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {photos.map((src, i) => (
-                  <div
-                    key={i}
-                    className="relative aspect-[4/3] rounded-xl overflow-hidden border"
-                  >
+                  <div key={i} className="relative aspect-[4/3] rounded-xl overflow-hidden border">
                     <Image src={src} alt={`photo-${i + 1}`} fill className="object-cover" />
                     <div className="absolute left-2 top-2 inline-flex items-center gap-1 text-xs bg-black/55 text-white px-2 py-1 rounded">
                       <LuCamera /> {i + 1}
@@ -380,20 +296,19 @@ export default function MasterProfilePage() {
         </div>
       </div>
 
-      {/* Блок похожих (опционально можно вывести твои карточки) */}
+      {/* Похожие мастера — по категории */}
+      {/* (опционально можно добавить твой же грид карточек) */}
       {cat?.name && (
         <div className="mt-6">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm sm:text-base font-semibold text-gray-900 uppercase tracking-wider">
               Похожие специалисты: {cat.name}
             </h3>
-            <Link
-              href={`/masters?categoryId=${master.categoryId}`}
-              className="inline-flex items-center gap-1 text-sm text-[#00B140]"
-            >
+            <Link href={`/masters?categoryId=${master.categoryId}`} className="inline-flex items-center gap-1 text-sm text-[#00B140]">
               Смотреть всех <LuChevronRight />
             </Link>
           </div>
+          {/* сюда можно вывести твой <MasterCard /> со списком, если нужно */}
         </div>
       )}
     </section>

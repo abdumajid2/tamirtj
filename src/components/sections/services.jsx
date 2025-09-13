@@ -149,7 +149,7 @@ export default function ServicesSection() {
           {filtered.map((s) => (
             <article
               key={s.id}
-              className="bg-white rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.05)] border border-gray-100 overflow-hidden flex flex-col"
+              className="bg-white rounded-2xl shadow-2xl shadow-blue-100/60 hover:shadow-md transition-shadow duration-400 cursor-pointer border border-gray-100 overflow-hidden flex flex-col"
             >
               <div className="relative h-40 w-full">
                 <Image

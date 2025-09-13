@@ -1,16 +1,16 @@
-// server.js (CommonJS, Express 5 + json-server 0.17.x)
+// server.js (Express 5 + json-server 0.17.x)
 const path = require("path");
 const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
-const jsonServer = require("json-server"); // v0.17.4
+const jsonServer = require("json-server");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
 
 // ===== CONFIG =====
 const PORT = process.env.PORT || 4000;
-const DB_FILE = path.join(__dirname, "db.json"); // файл БД в корне
+const DB_FILE = path.join(__dirname, "db.json");
 
 // ===== JWT / Cookies =====
 const ACCESS_TTL = "15m";
@@ -29,7 +29,7 @@ function setCookie(res, name, value, opts = {}) {
     "Set-Cookie",
     cookie.serialize(name, value, {
       httpOnly: true,
-      sameSite: "lax", // для прод-https на другом домене: "none" + secure: true
+      sameSite: "lax",
       path: "/",
       secure: process.env.NODE_ENV === "production",
       ...opts,
@@ -75,7 +75,7 @@ if (!fs.existsSync(DB_FILE)) {
 // ===== APP =====
 const app = express();
 
-// ===== CORS (важно для Express 5: preflight на '(.*)') =====
+// ===== CORS =====
 const allowlist = new Set(
   (process.env.CORS_ORIGIN?.split(",") || [
     "http://localhost:3000",
@@ -85,13 +85,10 @@ const allowlist = new Set(
   ]).map((s) => s.trim())
 );
 console.log("CORS allowlist:", [...allowlist]);
-
 function corsOrigin(origin, cb) {
-  // SSR/Postman без Origin — разрешаем; браузер — проверяем allowlist
   if (!origin || allowlist.has(origin)) return cb(null, true);
   cb(new Error(`CORS: Origin ${origin} not allowed`));
 }
-
 app.use(
   cors({
     origin: corsOrigin,
@@ -99,39 +96,50 @@ app.use(
     exposedHeaders: ["X-Total-Count", "Link"],
   })
 );
-// Express 5: нельзя '*' — используем '(.*)'
 app.options(/.*/, cors({ origin: corsOrigin, credentials: true }));
-
 
 app.use(express.json());
 
-// ===== json-server =====
-const router = jsonServer.router(DB_FILE); // lowdb v1 API
+// ===== json-server setup (router ниже, после наших ручек!) =====
+const router = jsonServer.router(DB_FILE);
 const middlewares = jsonServer.defaults({ logger: true });
 app.use(middlewares);
 
-// ===== AUTH =====
+// ===== AUTH (ВАЖНО: до app.use("/", router)) =====
 app.post("/auth/register", async (req, res) => {
   try {
-    const { email, password, name = "User" } = req.body || {};
-    if (!email || !password)
+    // лог для проверки, что реально приходит с фронта
+    console.log("REGISTER BODY:", req.body);
+
+    const { email, password, name = "User", role, cityId } = req.body || {};
+    if (!email || !password) {
       return res.status(400).json({ message: "Email и пароль обязательны" });
+    }
 
     const db = router.db;
-    const exists = db.get("users").find({ email }).value();
+    const exists = db
+      .get("users")
+      .find((u) => String(u.email).toLowerCase() === String(email).toLowerCase())
+      .value();
     if (exists) return res.status(409).json({ message: "Пользователь уже существует" });
 
     const hash = await bcrypt.hash(password, 10);
     const id = Date.now();
+
+    // нормализация роли
+    const r = String(role || "").trim().toLowerCase();
+    const normalizedRole = r === "master" || r === "мастер" ? "master" : "user";
+
     const user = {
       id,
       email,
       password: hash,
       name,
-      role: "user",
-      cityId: 1,
+      role: normalizedRole,
+      cityId: Number.isInteger(cityId) ? cityId : 1,
       favorites: [],
     };
+
     db.get("users").push(user).write();
 
     const accessToken = signAccess({ sub: id, role: user.role, email: user.email });
@@ -139,10 +147,10 @@ app.post("/auth/register", async (req, res) => {
     setCookie(res, "refresh", refreshToken, { maxAge: 7 * 24 * 3600 });
 
     const { password: _pw, ...safe } = user;
-    res.json({ user: safe, accessToken });
+    return res.status(201).json({ user: safe, accessToken });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 });
 
@@ -183,7 +191,7 @@ app.post("/auth/refresh", (req, res) => {
     if (!user) return res.status(401).json({ message: "User not found" });
 
     const accessToken = signAccess({ sub: user.id, role: user.role, email: user.email });
-    const newRefresh = signRefresh({ sub: user.id }); // ротация refresh
+    const newRefresh = signRefresh({ sub: user.id });
     setCookie(res, "refresh", newRefresh, { maxAge: 7 * 24 * 3600 });
 
     res.json({ accessToken });
@@ -215,14 +223,15 @@ app.use((req, res, next) => {
   next();
 });
 
-// Пример: компании по subCategoryId с пагинацией
+// Пример: компании по подкатегории (гибко к числам/строкам)
 app.get("/companies/by-subcategory/:id", (req, res) => {
-  const id = Number(req.params.id);
+  const idStr = String(req.params.id);
   const db = router.db;
   const all = db.get("companies").value() || [];
   const filtered = all.filter(
-    (c) => Array.isArray(c.subCategoryIds) && c.subCategoryIds.includes(id)
+    (c) => Array.isArray(c.subCategoryIds) && c.subCategoryIds.some((x) => String(x) === idStr)
   );
+
   const page = Number(req.query._page || 1);
   const limit = Number(req.query._limit || 10);
   const start = (page - 1) * limit;
@@ -232,38 +241,14 @@ app.get("/companies/by-subcategory/:id", (req, res) => {
   res.json(filtered.slice(start, end));
 });
 
-// Подключаем json-server (все остальные ресурсы из db.json)
+// ===== json-server router (после наших ручек!) =====
 app.use("/", router);
 
-// DEV сидер тестового пользователя
-app.post("/dev/seed-user", async (_req, res) => {
-  const db = router.db;
-  const email = "test@example.com";
-  const exists = db.get("users").find({ email }).value();
-  if (exists) return res.json({ ok: true, email, note: "already exists" });
-  const hash = await bcrypt.hash("123456", 10);
-  const id = Date.now();
-  db.get("users")
-    .push({
-      id,
-      email,
-      password: hash,
-      name: "Test User",
-      role: "user",
-      cityId: 1,
-      favorites: [],
-    })
-    .write();
-  res.json({ ok: true, email, password: "123456" });
-});
-
-// ===== Error handler (аккуратный ответ JSON) =====
+// ===== Error handler =====
 app.use((err, _req, res, _next) => {
   const status = err?.status || 500;
   const message = err?.message || "Server error";
-  if (process.env.NODE_ENV !== "production") {
-    console.error("ERR:", err);
-  }
+  if (process.env.NODE_ENV !== "production") console.error("ERR:", err);
   res.status(status).json({ message });
 });
 

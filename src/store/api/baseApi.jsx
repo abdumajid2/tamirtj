@@ -46,73 +46,129 @@ export const baseApi = createApi({
       providesTags: ["Services"],
     }),
 
-     getMasterById: build.query({
-  query: (id) => `/masters/${id}`,
-  providesTags: (r, e, id) => [{ type: "Masters", id }],
-}),
+    getMasterById: build.query({
+      query: (id) => `/masters/${id}`,
+      providesTags: (r, e, id) => [{ type: "Masters", id }],
+    }),
+
+    // НОВОЕ:
+    getMasterReviews: build.query({
+      query: (masterId) =>
+        `/reviews?targetType=master&targetId=${masterId}&_sort=createdAt&_order=desc`,
+      providesTags: (r, e, masterId) => [{ type: "Reviews", id: masterId }],
+    }),
 
     // src/store/api/baseApi.js (фрагмент)
-getMasters: build.query({
-  query: (p = {}) => {
-    const s = new URLSearchParams();
+    getMasters: build.query({
+      query: (p = {}) => {
+        const s = new URLSearchParams();
 
-    // фильтры (ничего лишнего — без _page/_limit/_sort)
-    if (p.cityId != null && p.cityId !== "") {
-      s.set("cityId", String(p.cityId));
-    }
-    if (p.categoryId != null && p.categoryId !== "") {
-      s.set("categoryId", String(p.categoryId));
-    }
-    // для массивов json-server обычно ищется через *_like
-    if (p.subCategoryId != null && p.subCategoryId !== "") {
-      s.set("subCategoryIds_like", String(p.subCategoryId));
-    }
-    if (p.q) {
-      s.set("q", String(p.q));
-    }
+        // фильтры (ничего лишнего — без _page/_limit/_sort)
+        if (p.cityId != null && p.cityId !== "") {
+          s.set("cityId", String(p.cityId));
+        }
+        if (p.categoryId != null && p.categoryId !== "") {
+          s.set("categoryId", String(p.categoryId));
+        }
+        // для массивов json-server обычно ищется через *_like
+        if (p.subCategoryId != null && p.subCategoryId !== "") {
+          s.set("subCategoryIds_like", String(p.subCategoryId));
+        }
+        if (p.q) {
+          s.set("q", String(p.q));
+        }
 
-    const qs = s.toString();
-    // если фильтров нет — вернём весь список
-    return qs ? `/masters?${qs}` : "/masters";
-  },
-  providesTags: ["Masters"],
-}),
-
+        const qs = s.toString();
+        // если фильтров нет — вернём весь список
+        return qs ? `/masters?${qs}` : "/masters";
+      },
+      providesTags: ["Masters"],
+    }),
 
     // --- компании
     getCompanies: build.query({
-      query: (()=> "/companies"),
+      query: () => "/companies",
       providesTags: ["Companies"],
     }),
 
     // --- заказы
     getOrders: build.query({
-      query : (()=> "/orders"),
+      query: () => "/orders",
       providesTags: ["Orders"],
     }),
 
     // --- офферы конкретного заказа
     getOffersByOrder: build.query({
-      query: (()=> "/offers"),
+      query: () => "/offers",
       providesTags: ["Offers"],
-        
     }),
 
     // --- отзывы по цели (требует targetType + targetId)
     getReviews: build.query({
-      query: (()=> "/reviews"),
+      query: () => "/reviews",
       providesTags: ["Reviews"],
     }),
+    postMasters: build.mutation({
+      query: () => "post/Account",
+      providesTags: ["Account"],
+    }),
 
-    // --- пользователи (для авторов отзывов)
     getUsers: build.query({
       query: () => "/users",
       providesTags: ["Users"],
     }),
+    // ... предыдущие endpoints
+
+    getThreads: build.query({
+  query: ({ userId }) => `/threads?userId=${userId}&_sort=lastTs&_order=desc`,
+}),
+
+
+
+    getThreadById: build.query({
+      query: (threadId) => `/threads/${threadId}`,
+      providesTags: (r, e, id) => [{ type: "Threads", id }],
+    }),
+
+    getMessages: build.query({
+      query: (threadId) =>
+        `/messages?threadId=${threadId}&_sort=createdAt&_order=asc`,
+      providesTags: (r, e, threadId) => [{ type: "Messages", id: threadId }],
+    }),
+
+    sendMessage: build.mutation({
+      query: ({ threadId, from, text }) => ({
+        url: "/messages",
+        method: "POST",
+        body: { threadId, from, text, createdAt: new Date().toISOString() },
+      }),
+      invalidatesTags: (r, e, { threadId }) => [
+        { type: "Messages", id: threadId },
+        { type: "Threads", id: threadId },
+      ],
+    }),
+
+    // создать тред (если его нет)
+    createThread: build.mutation({
+      query: ({ masterId, userId }) => ({
+        url: "/threads",
+        method: "POST",
+        body: {
+          id: `t-${masterId}-u${userId}`,
+          masterId,
+          userId,
+          lastMessage: "",
+          lastTs: new Date().toISOString(),
+          unreadForUser: 0,
+          unreadForMaster: 0,
+        },
+      }),
+      invalidatesTags: ["Threads"],
+    }),
 
     // --- комментарии к конкретному отзыву
     getComments: build.query({
-      query: (()=> "/comments"),
+      query: () => "/comments",
       providesTags: ["Comments"],
     }),
   }),
@@ -130,4 +186,10 @@ export const {
   useGetServicesQuery,
   useGetUsersQuery,
   useGetMasterByIdQuery,
+  useGetMasterReviewsQuery,
+  useGetThreadsQuery,
+  useGetThreadByIdQuery,
+  useGetMessagesQuery,
+  useSendMessageMutation,
+  useCreateThreadMutation,
 } = baseApi;
