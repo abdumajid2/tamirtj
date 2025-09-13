@@ -450,6 +450,13 @@ export default function Navbar() {
                       Избранное
                     </Link>
                     <Link
+                      href="/chats"
+                      className="block px-3 py-2 rounded-lg text-sm hover:bg-gray-50"
+                      onClick={() => setOpenUser(false)}
+                    >
+                      Мои чаты
+                    </Link>
+                    <Link
                       href="/orders"
                       className="block px-3 py-2 rounded-lg text-sm hover:bg-gray-50"
                       onClick={() => setOpenUser(false)}

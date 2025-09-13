@@ -1,27 +1,38 @@
 "use client";
+import Link from "next/link";
 import { useRegisterMutation } from "@/store/api/authApi";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useGetCitiesQuery } from "@/store/api/baseApi";
 
 export default function RegisterPage() {
-  const [registerUser, { isLoading }] = useRegisterMutation();
   const router = useRouter();
+  const token = useSelector((s) => s.auth?.accessToken);
+  const [register, { isLoading }] = useRegisterMutation();
+  const { data: cities = [] } = useGetCitiesQuery();
   const [err, setErr] = useState("");
+
+  useEffect(() => {
+    if (token) router.replace("/");
+  }, [token, router]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
     const body = {
-      name: e.currentTarget.name.value.trim(),
-      email: e.currentTarget.email.value.trim(),
-      password: e.currentTarget.password.value,
-      phone: e.currentTarget.phone.value.trim() || undefined,
-      cityId: Number(e.currentTarget.cityId.value) || null,
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      password: form.password.value,
+      role: form.role.value, // ← важное поле
+      cityId: Number(form.cityId.value || 1),
     };
     setErr("");
     try {
-      await registerUser(body).unwrap();
-      router.push("/"); // или /profile
+      await register(body).unwrap();
+      console.log("Register payload ->", body);
+ // уже кладёт в стор токен+юзера
+      router.push("/");
     } catch (e) {
       setErr(e?.data?.message || "Ошибка регистрации");
     }
@@ -32,68 +43,92 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         <div className="rounded-2xl border border-gray-100 shadow-lg bg-white p-6 md:p-8">
           <div className="mb-6 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">Регистрация</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">
+              Регистрация
+            </h1>
             <p className="text-sm text-gray-500 mt-1">
-              Создайте аккаунт, чтобы пользоваться сервисом
+              Создайте аккаунт, чтобы продолжить.
             </p>
           </div>
 
           <form onSubmit={onSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Имя</label>
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-gray-700"
+              >
+                Имя
+              </label>
               <input
+                id="name"
                 name="name"
+                type="text"
+                required
                 placeholder="Ваше имя"
                 className="border border-gray-200 rounded-xl px-4 py-2.5 w-full outline-none focus:ring-4 focus:ring-green-100 focus:border-[#00B140]"
-                required
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Email</label>
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
               <input
+                id="email"
                 name="email"
                 type="email"
+                required
                 placeholder="you@example.com"
                 className="border border-gray-200 rounded-xl px-4 py-2.5 w-full outline-none focus:ring-4 focus:ring-green-100 focus:border-[#00B140]"
-                required
               />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Телефон</label>
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700"
+              >
+                Пароль
+              </label>
               <input
-                name="phone"
-                placeholder="+992 900 00 00 00"
+                id="password"
+                name="password"
+                type="password"
+                required
+                placeholder="Придумайте пароль"
                 className="border border-gray-200 rounded-xl px-4 py-2.5 w-full outline-none focus:ring-4 focus:ring-green-100 focus:border-[#00B140]"
               />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700">Роль</label>
+              <select
+                name="role"
+                defaultValue="user"
+                required
+                className="border border-gray-200 rounded-xl px-4 py-2.5 w-full"
+              >
+                <option value="user">Пользователь</option>
+                <option value="master">Мастер</option>
+              </select>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700">Город</label>
               <select
                 name="cityId"
-                className="border border-gray-200 rounded-xl px-4 py-2.5 w-full outline-none focus:ring-4 focus:ring-green-100 focus:border-[#00B140]"
                 defaultValue="1"
+                className="border border-gray-200 rounded-xl px-4 py-2.5 w-full"
               >
-                <option value="1">Душанбе</option>
-                <option value="2">Худжанд</option>
-                <option value="3">Бохтар</option>
-                <option value="4">Куляб</option>
-                <option value="5">Истаравшан</option>
+                {cities?.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
               </select>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">Пароль</label>
-              <input
-                name="password"
-                type="password"
-                placeholder="Пароль (мин. 6 символов)"
-                minLength={6}
-                required
-                className="border border-gray-200 rounded-xl px-4 py-2.5 w-full outline-none focus:ring-4 focus:ring-green-100 focus:border-[#00B140]"
-              />
             </div>
 
             {err && <p className="text-red-600 text-sm">{err}</p>}
@@ -101,11 +136,11 @@ export default function RegisterPage() {
             <button
               disabled={isLoading}
               className="w-full rounded-xl px-4 py-2.5 font-semibold text-white transition
-                         bg-[#00B140] hover:opacity-90 active:opacity-80
-                         disabled:opacity-60 disabled:cursor-not-allowed
-                         shadow-[0_6px_20px_rgba(0,177,64,0.35)]"
+                       bg-[#00B140] hover:opacity-90 active:opacity-80
+                       disabled:opacity-60 disabled:cursor-not-allowed
+                       shadow-[0_6px_20px_rgba(0,177,64,0.35)]"
             >
-              {isLoading ? "Создаем..." : "Зарегистрироваться"}
+              {isLoading ? "Создаём..." : "Зарегистрироваться"}
             </button>
           </form>
 
