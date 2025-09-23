@@ -342,6 +342,33 @@
       "phone": "+992900800604",
       "cityId": "1",
       "role": "user",
+      "threads": [
+        {
+          "id": "t-107-u1",
+          "masterId": "107",
+          "userId": "1",
+          "lastMessage": "Добрый вечер!",
+          "lastTs": "2025-09-13T19:05:00Z",
+          "unreadForUser": 0,
+          "unreadForMaster": 1
+        }
+      ],
+      "messages": [
+        {
+          "id": "m1",
+          "threadId": "t-107-u1",
+          "from": "user",
+          "text": "Здравствуйте!",
+          "createdAt": "2025-09-13T19:00:00Z"
+        },
+        {
+          "id": "m2",
+          "threadId": "t-107-u1",
+          "from": "master",
+          "text": "Добрый вечер!",
+          "createdAt": "2025-09-13T19:05:00Z"
+        }
+      ],
       "favorites": [
         { "targetType": "master", "targetId": "101" },
         { "targetType": "company", "targetId": "201" }

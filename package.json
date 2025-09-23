@@ -4,18 +4,25 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:3001": "next dev -p 3005",
+    "dev:port": "next dev -p 3005",
     "build": "next build --turbopack",
-    "start": "node server.js",
-    "lint": "eslint",
-    "api": "node server.js"
+    "start": "next start",
+    "backend": "nodemon server.js",
+    "backend:prod": "node server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "api": "node server.js",
+    "lint": "eslint ."
   },
   "dependencies": {
+    "@prisma/client": "^6.16.2",
     "@reduxjs/toolkit": "^2.8.2",
     "antd": "^5.27.1",
     "bcryptjs": "^3.0.2",
     "cookie": "^1.0.2",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "json-server": "^0.17.4",
     "jsonwebtoken": "^9.0.2",
@@ -25,18 +32,30 @@
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
-    "swiper": "^11.2.10"
+    "swiper": "^11.2.10",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.16.2",
     "tailwindcss": "^4"
   },
   "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
   "main": "server.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdumajid2/tamirtj.git"
+  },
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/abdumajid2/tamirtj/issues"
+  },
+  "homepage": "https://github.com/abdumajid2/tamirtj#readme"
 }

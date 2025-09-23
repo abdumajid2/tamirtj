@@ -9,10 +9,8 @@ import {
   useSendMessageMutation,
 } from "@/store/api/baseApi";
 
-const userId = "1"; // текущий пользователь
-
 export default function ChatThreadPage() {
-  const { threadId } = useParams();
+  const { threadId } = useParams();               // { threadId: "t-107-u1" }
   const { data: thread } = useGetThreadByIdQuery(threadId);
   const { data: master } = useGetMasterByIdQuery(thread?.masterId, { skip: !thread?.masterId });
   const { data: messages = [] } = useGetMessagesQuery(threadId, { skip: !threadId });
@@ -20,7 +18,6 @@ export default function ChatThreadPage() {
 
   const [text, setText] = useState("");
   const endRef = useRef(null);
-
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages.length]);
 
   async function handleSend() {
@@ -39,16 +36,10 @@ export default function ChatThreadPage() {
 
       <div className="flex-1 overflow-y-auto p-3 bg-gray-50 rounded-lg mt-3">
         {messages.map((m) => (
-          <div
-            key={m.id || m.createdAt}
-            className={`max-w-[70%] p-2 rounded-lg mb-2 ${
-              m.from === "user" ? "bg-emerald-100 ml-auto" : "bg-white"
-            }`}
-          >
+          <div key={m.id || m.createdAt}
+               className={`max-w-[70%] p-2 rounded-lg mb-2 ${m.from === "user" ? "bg-emerald-100 ml-auto" : "bg-white"}`}>
             <div className="text-sm">{m.text}</div>
-            <div className="mt-1 text-[11px] text-gray-500">
-              {new Date(m.createdAt).toLocaleString()}
-            </div>
+            <div className="mt-1 text-[11px] text-gray-500">{new Date(m.createdAt).toLocaleString()}</div>
           </div>
         ))}
         <div ref={endRef} />
