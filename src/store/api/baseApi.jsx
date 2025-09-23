@@ -28,6 +28,9 @@ export const baseApi = createApi({
     "Comments",
     "Services",
     "Users",
+    "Threads",
+    "Messages",
+    "Masters",
   ],
   endpoints: (build) => ({
     // --- справочники
@@ -120,20 +123,24 @@ export const baseApi = createApi({
     // ... предыдущие endpoints
 
     getThreads: build.query({
-  query: ({ userId }) => `/threads?userId=${userId}&_sort=lastTs&_order=desc`,
-}),
-
-
-
-    getThreadById: build.query({
-      query: (threadId) => `/threads/${threadId}`,
-      providesTags: (r, e, id) => [{ type: "Threads", id }],
+      // вариант с params — удобно и читабельно
+      query: ({ userId }) => ({
+        url: "/threads",
+        params: { userId, _sort: "lastTs", _order: "desc" },
+      }),
     }),
-
     getMessages: build.query({
-      query: (threadId) =>
-        `/messages?threadId=${threadId}&_sort=createdAt&_order=asc`,
-      providesTags: (r, e, threadId) => [{ type: "Messages", id: threadId }],
+      query: (threadId) => ({
+        url: "/messages",
+        params: { threadId, _sort: "createdAt", _order: "asc" },
+      }),
+    }),
+    sendMessage: build.mutation({
+      query: ({ threadId, from, text }) => ({
+        url: "/messages",
+        method: "POST",
+        body: { threadId, from, text, createdAt: new Date().toISOString() },
+      }),
     }),
 
     sendMessage: build.mutation({
@@ -147,23 +154,9 @@ export const baseApi = createApi({
         { type: "Threads", id: threadId },
       ],
     }),
-
-    // создать тред (если его нет)
-    createThread: build.mutation({
-      query: ({ masterId, userId }) => ({
-        url: "/threads",
-        method: "POST",
-        body: {
-          id: `t-${masterId}-u${userId}`,
-          masterId,
-          userId,
-          lastMessage: "",
-          lastTs: new Date().toISOString(),
-          unreadForUser: 0,
-          unreadForMaster: 0,
-        },
-      }),
-      invalidatesTags: ["Threads"],
+    getThreadById: build.query({
+      query: (threadId) => `/threads/${threadId}`,
+      providesTags: (_r, _e, id) => [{ type: "Threads", id }],
     }),
 
     // --- комментарии к конкретному отзыву

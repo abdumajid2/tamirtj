@@ -11,7 +11,7 @@ function ThreadRow({ t }) {
   const { data: master } = useGetMasterByIdQuery(t.masterId);
   return (
     <Link
-      href={`/chat/${t.id}`}
+      href={`/chats/${t.id}`}
       className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-xl border"
     >
       <div className="relative w-10 h-10 rounded-full overflow-hidden border">

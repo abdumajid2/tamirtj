@@ -698,6 +698,33 @@
       "phone": "+992900800604",
       "cityId": 1,
       "role": "user",
+      "threads": [
+        {
+          "id": "t-107-u1",
+          "masterId": "107",
+          "userId": "1",
+          "lastMessage": "Добрый вечер!",
+          "lastTs": "2025-09-13T19:05:00Z",
+          "unreadForUser": 0,
+          "unreadForMaster": 1
+        }
+      ],
+      "messages": [
+        {
+          "id": "m1",
+          "threadId": "t-107-u1",
+          "from": "user",
+          "text": "Здравствуйте!",
+          "createdAt": "2025-09-13T19:00:00Z"
+        },
+        {
+          "id": "m2",
+          "threadId": "t-107-u1",
+          "from": "master",
+          "text": "Добрый вечер!",
+          "createdAt": "2025-09-13T19:05:00Z"
+        }
+      ],
       "favorites": [
         {
           "targetType": "master",
@@ -816,6 +843,15 @@
       "password": "$2b$10$oPZ5yPi3djgJelO8nOgzVu3x1WrRrshfVNofU.2eBcxkvyWP6nnWe",
       "name": "Komil",
       "role": "user",
+      "cityId": 1,
+      "favorites": []
+    },
+    {
+      "id": 1758659569561,
+      "email": "alijon78@gmail.com",
+      "password": "$2b$10$OnAxdgdq7H7737h.KZJd2u7RXaKq38i6VWaxhlAin6xAOuj22bzzS",
+      "name": "Ali",
+      "role": "master",
       "cityId": 1,
       "favorites": []
     }
@@ -1240,7 +1276,6 @@
       "unreadForMaster": 1
     }
   ],
-
   "messages": [
     {
       "id": "m1",
@@ -1255,6 +1290,41 @@
       "from": "master",
       "text": "Добрый вечер!",
       "createdAt": "2025-09-13T19:05:00Z"
+    },
+    {
+      "threadId": "t-107-u1",
+      "from": "user",
+      "text": "ff",
+      "createdAt": "2025-09-13T18:33:38.901Z",
+      "id": "RKDo03r"
+    },
+    {
+      "threadId": "t-107-u1",
+      "from": "user",
+      "text": "sd",
+      "createdAt": "2025-09-13T18:33:50.895Z",
+      "id": "C8LKNKf"
+    },
+    {
+      "threadId": "104",
+      "from": "user",
+      "text": "salom",
+      "createdAt": "2025-09-13T18:37:16.218Z",
+      "id": "Euh5fDX"
+    },
+    {
+      "threadId": "104",
+      "from": "user",
+      "text": "sdf",
+      "createdAt": "2025-09-13T18:37:52.879Z",
+      "id": "cSKF9An"
+    },
+    {
+      "threadId": "104",
+      "from": "user",
+      "text": "sdf",
+      "createdAt": "2025-09-13T18:39:00.779Z",
+      "id": "WK_oo4M"
     }
   ],
   "companies": [

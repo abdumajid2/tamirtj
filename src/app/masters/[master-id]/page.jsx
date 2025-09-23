@@ -242,7 +242,7 @@ export default function MasterProfilePage() {
             })}
             <div className="ml-auto pr-2 sm:pr-4">
               <Link
-                href={`/request?master=${master.id}`}
+                href={`/chats/${master.id}`}
                 className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white"
                 style={{ background: BRAND.green }}
               >
