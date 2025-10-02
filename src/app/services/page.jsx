@@ -1,37 +1,21 @@
 // src/components/sections/ServicesCatalog.jsx
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  LuBoxes,
-  LuZap,
-  LuWrench,
-  LuArmchair,
-  LuChevronRight,
-  LuFile,
-  LuUsers,
-  LuCoins,
-  LuShieldCheck,
-  LuMessageSquare,
-  LuBadgeCheck,
-  LuPhone,
-  LuStar,
-  LuFilter,
-  LuChevronDown,
-  LuX,
+  LuBoxes, LuZap, LuWrench, LuArmchair, LuChevronRight, LuUsers,
+  LuCoins, LuShieldCheck, LuMessageSquare, LuFile, LuBadgeCheck,
+  LuPhone, LuStar, LuFilter, LuChevronDown, LuX
 } from "react-icons/lu";
 import {
   useGetCategoriesQuery,
   useGetServicesQuery,
   useGetMastersQuery,
 } from "@/store/api/baseApi";
-import HeroSpotlight from "@/components/hero/HeroSpotlight";
 
 const BRAND = { green: "#00B140", greenLight: "#E8F8EE", dark: "#111827" };
 
-/** иконки для категорий */
 const CAT_ICON = {
   Электрика: LuZap,
   Электрики: LuZap,
@@ -55,55 +39,25 @@ function shuffle(a) {
   return x;
 }
 
-/* ====== Табы (локальные для request/prices/services/masters) ====== */
 const ALL_TABS = [
-  {
-    key: "request",
-    label: "Заявка",
-    href: "/request",
-    icon: LuFile,
-    local: true,
-  },
-  {
-    key: "masters",
-    label: "Мастера",
-    href: "/masters",
-    icon: LuUsers,
-    badge: 6175,
-    local: true,
-  },
+  { key: "request", label: "Заявка", href: "/request", icon: LuFile, local: true },
+  { key: "masters", label: "Мастера", href: "/masters", icon: LuUsers, badge: 6175, local: true },
   { key: "prices", label: "Цены", href: "/prices", icon: LuCoins, local: true },
-  {
-    key: "services",
-    label: "Сервисы",
-    href: "/services",
-    icon: LuShieldCheck,
-    local: true,
-  },
-  {
-    key: "chat",
-    label: "Чат поддержки",
-    href: "/support",
-    icon: LuMessageSquare,
-  },
+  { key: "services", label: "Сервисы", href: "/services", icon: LuShieldCheck, local: true },
+  { key: "chat", label: "Чат поддержки", href: "/support", icon: LuMessageSquare },
 ];
 
-/* ====== ВСПОМОГАТЕЛЬНЫЕ UI ====== */
 function Stars({ rating = 0 }) {
-  const full = Math.round(Number(rating) || 0);
+  const full = Math.max(0, Math.min(5, Math.round(Number(rating) || 0)));
   return (
     <div className="flex items-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <LuStar
-          key={i}
-          className={i < full ? "text-yellow-400" : "text-gray-300"}
-        />
+        <LuStar key={i} className={i < full ? "text-yellow-400" : "text-gray-300"} />
       ))}
     </div>
   );
 }
 
-/* ====== КАРТОЧКИ ====== */
 function MasterCard({ m, catName }) {
   const CatIcon = CAT_ICON[catName] || LuBoxes;
   return (
@@ -118,65 +72,44 @@ function MasterCard({ m, catName }) {
             className="object-cover"
           />
         </div>
-
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5">
-            <h3 className="font-semibold text-gray-900 truncate">
-              {m.fullName}
-            </h3>
-            {m.verified && (
-              <LuBadgeCheck className="text-green-500" title="Проверенный" />
-            )}
+            <h3 className="font-semibold text-gray-900 truncate">{m.fullName}</h3>
+            {m.verified && <LuBadgeCheck className="text-green-500" title="Проверенный" />}
           </div>
-
           <div className="mt-0.5 flex items-center gap-2 text-xs text-gray-500">
             <Stars rating={m.rating} />
-            <span className="text-gray-600">{Number(m.rating).toFixed(1)}</span>
+            <span className="text-gray-600">{Number(m.rating || 0).toFixed(1)}</span>
             <span>•</span>
-            <span>{m.reviewsCount} отзывов</span>
+            <span>{m.reviewsCount ?? 0} отзывов</span>
           </div>
-
           <div className="mt-1 flex items-center gap-2">
-            <span className="px-1.5 py-0.5 rounded bg-emerald-500 text-white text-[11px] font-bold">
-              24/7
-            </span>
-            <span className="px-1.5 py-0.5 rounded bg-red-500 text-white text-[11px] font-bold">
-              Срочный вызов
-            </span>
+            <span className="px-1.5 py-0.5 rounded bg-emerald-500 text-white text-[11px] font-bold">24/7</span>
+            <span className="px-1.5 py-0.5 rounded bg-red-500 text-white text-[11px] font-bold">Срочный вызов</span>
           </div>
         </div>
-
         <a
           href={`tel:${m.phone || ""}`}
+          title={`Позвонить ${m.fullName}`}
           className="ml-auto w-10 h-10 rounded-full bg-[color:var(--brand-green)] text-white flex items-center justify-center hover:opacity-90"
           style={{ ["--brand-green"]: BRAND.green }}
           aria-label="Позвонить"
+          rel="nofollow"
         >
           <LuPhone className="text-xl" />
         </a>
       </div>
-
       <div className="px-5 pb-5">
-        {["Диагностика/выезд", "Работа по часам", "Материал по опту"].map(
-          (t, i) => (
-            <div
-              key={i}
-              className="flex items-center text-[13px] text-gray-700"
-            >
-              <span className="whitespace-nowrap">{t}</span>
-              <span className="flex-1 border-b border-dotted mx-2 opacity-40" />
-              <span className="whitespace-nowrap text-gray-500">
-                от{" "}
-                {Number((m.priceFrom ?? 0) * (1 + i * 0.25)).toLocaleString(
-                  "ru-RU"
-                )}{" "}
-                сoмони
-              </span>
-            </div>
-          )
-        )}
+        {["Диагностика/выезд", "Работа по часам", "Материал по опту"].map((t, i) => (
+          <div key={i} className="flex items-center text-[13px] text-gray-700">
+            <span className="whitespace-nowrap">{t}</span>
+            <span className="flex-1 border-b border-dotted mx-2 opacity-40" />
+            <span className="whitespace-nowrap text-gray-500">
+              от {Number((m.priceFrom ?? 0) * (1 + i * 0.25)).toLocaleString("ru-RU")} сoмони
+            </span>
+          </div>
+        ))}
       </div>
-
       <div className="px-5 pb-5 -mt-2">
         <span
           className="inline-flex items-center gap-1 text-[11px] font-extrabold tracking-wide px-2.5 py-1 rounded-full text-white"
@@ -186,14 +119,9 @@ function MasterCard({ m, catName }) {
           {(catName || "Мастер").toUpperCase()}
         </span>
       </div>
-
       <div className="px-5 pb-5 -mt-3">
-        <Link
-          href={`/masters/${m.id}`}
-          className="group inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900"
-        >
-          Подробнее
-          <LuChevronRight className="transition-transform group-hover:translate-x-0.5" />
+        <Link href={`/masters/${m.id}`} className="group inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
+          Подробнее <LuChevronRight className="transition-transform group-hover:translate-x-0.5" />
         </Link>
       </div>
     </article>
@@ -222,37 +150,22 @@ function ServiceCard({ s, catLabel }) {
           {(s.category || catLabel || "Сервис").toUpperCase()}
         </span>
       </div>
-
       <div className="p-6">
         <h3 className="text-[15px] font-semibold leading-snug text-gray-900 min-h-[40px]">
-          {s.title}{" "}
-          {s.subtitle && <span className="text-gray-500">{s.subtitle}</span>}
+          {s.title} {s.subtitle && <span className="text-gray-500">{s.subtitle}</span>}
         </h3>
-
         <div className="mt-3 text-center rounded-xl border border-gray-200 py-3">
           <div className="text-xs text-gray-500 -mb-1">от</div>
           <div className="text-[24px] font-extrabold text-gray-900">
-            {Number(s.price ?? 0).toLocaleString("ru-RU")}{" "}
-            <span className="text-[14px] font-bold">
-              {s.currency ?? "сомони"}
-            </span>
+            {Number(s.price ?? 0).toLocaleString("ru-RU")} <span className="text-[14px] font-bold">{s.currency ?? "сомони"}</span>
           </div>
         </div>
-
-        <button
-          className="mt-4 w-full rounded-full text-white font-semibold py-3 hover:opacity-95 active:opacity-90 transition"
-          style={{ background: BRAND.green }}
-        >
+        <button className="mt-4 w-full rounded-full text-white font-semibold py-3 hover:opacity-95 active:opacity-90 transition" style={{ background: BRAND.green }}>
           Заказать услугу
         </button>
-
         <div className="mt-3 flex items-center justify-center">
-          <Link
-            href={`/services/${s.id}`}
-            className="group inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900"
-          >
-            Подробнее
-            <LuChevronRight className="transition-transform group-hover:translate-x-0.5" />
+          <Link href={`/services/${s.id}`} className="group inline-flex items-center gap-2 text-sm text-gray-700 hover:text-gray-900">
+            Подробнее <LuChevronRight className="transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
       </div>
@@ -263,7 +176,6 @@ function ServiceCard({ s, catLabel }) {
 function PriceCard({ cat, items = [], mastersCount = 0 }) {
   const IconComp = CAT_ICON[cat?.name] || LuBoxes;
   const fmt = (n) => `От ${Number(n || 0).toLocaleString("ru-RU")} с.`;
-
   return (
     <article className="bg-white rounded-[22px] border border-gray-100 shadow-[0_12px_40px_rgba(17,24,39,0.08)] overflow-hidden p-4 sm:p-5">
       <div className="flex items-center justify-between">
@@ -272,42 +184,25 @@ function PriceCard({ cat, items = [], mastersCount = 0 }) {
           <h3 className="font-semibold text-gray-900">{cat?.name}</h3>
         </div>
         <div className="text-xs text-gray-500 flex items-center gap-1">
-          <LuUsers />
-          <span>{mastersCount}</span>
-          <span>мастеров на сайте</span>
+          <LuUsers /><span>{mastersCount}</span><span>мастеров на сайте</span>
         </div>
       </div>
-
       <div className="mt-3 space-y-2">
         {items.map((s) => (
-          <div
-            key={s.id}
-            className="flex items-center text-sm bg-gray-50 rounded-lg px-3 py-2"
-          >
+          <div key={s.id} className="flex items-center text-sm bg-gray-50 rounded-lg px-3 py-2">
             <span className="truncate">{s.title}</span>
             <span className="flex-1 border-b border-dotted mx-2 opacity-50" />
-            <span
-              className="whitespace-nowrap font-semibold text-[color:var(--brand-green)]"
-              style={{ ["--brand-green"]: BRAND.green }}
-            >
+            <span className="whitespace-nowrap font-semibold text-[color:var(--brand-green)]" style={{ ["--brand-green"]: BRAND.green }}>
               {fmt(s.price)}
             </span>
           </div>
         ))}
       </div>
-
       <div className="mt-4 grid grid-cols-2 gap-2">
-        <button
-          type="button"
-          className="h-10 rounded-full bg-white border text-gray-700 hover:bg-gray-50 flex items-center justify-center text-sm font-semibold"
-        >
+        <button type="button" className="h-10 rounded-full bg-white border text-gray-700 hover:bg-gray-50 flex items-center justify-center text-sm font-semibold">
           Показать мастеров
         </button>
-        <button
-          type="button"
-          className="h-10 rounded-full text-white flex items-center justify-center text-sm font-semibold hover:opacity-95 active:opacity-90"
-          style={{ background: BRAND.green }}
-        >
+        <button type="button" className="h-10 rounded-full text-white flex items-center justify-center text-sm font-semibold hover:opacity-95 active:opacity-90" style={{ background: BRAND.green }}>
           Вызвать мастера
         </button>
       </div>
@@ -315,27 +210,12 @@ function PriceCard({ cat, items = [], mastersCount = 0 }) {
   );
 }
 
-/* ====== МОДАЛ ФИЛЬТРА ====== */
-function FilterModal({
-  open,
-  onClose,
-  categories = [],
-  currentCat = "all",
-  currentSub = "all",
-  onApply,
-}) {
+function FilterModal({ open, onClose, categories = [], currentCat = "all", currentSub = "all", onApply }) {
   const [cat, setCat] = useState(currentCat);
   const [sub, setSub] = useState(currentSub);
-
-  useEffect(() => {
-    setCat(currentCat);
-    setSub(currentSub);
-  }, [currentCat, currentSub, open]);
-
-  const activeCatObj =
-    cat === "all" ? null : categories.find((c) => String(c.id) === String(cat));
+  useEffect(() => { setCat(currentCat); setSub(currentSub); }, [currentCat, currentSub, open]);
+  const activeCatObj = cat === "all" ? null : categories.find((c) => String(c.id) === String(cat));
   const subs = activeCatObj?.subcategories || [];
-
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[100]">
@@ -343,84 +223,41 @@ function FilterModal({
       <div className="absolute left-1/2 top-[8%] -translate-x-1/2 w-[92%] max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b">
           <h3 className="text-[16px] font-semibold text-gray-900">Фильтр</h3>
-          <button onClick={onClose} className="p-2 rounded hover:bg-gray-100">
-            <LuX />
-          </button>
+          <button onClick={onClose} className="p-2 rounded hover:bg-gray-100"><LuX /></button>
         </div>
-
         <div className="p-5 grid gap-4">
           <div>
-            <div className="text-[13px] font-semibold text-gray-800 mb-2">
-              Категория
-            </div>
+            <div className="text-[13px] font-semibold text-gray-800 mb-2">Категория</div>
             <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => {
-                  setCat("all");
-                  setSub("all");
-                }}
-                className={`px-3 py-1.5 rounded-full text-sm border ${
-                  cat === "all"
-                    ? "bg-[color:var(--brand-green)] text-white border-transparent"
-                    : "bg-white text-gray-800 border-gray-300"
-                }`}
-                style={{ ["--brand-green"]: BRAND.green }}
-              >
-                Все
-              </button>
+              <button onClick={() => { setCat("all"); setSub("all"); }}
+                className={`px-3 py-1.5 rounded-full text-sm border ${cat === "all" ? "bg-[color:var(--brand-green)] text-white border-transparent" : "bg-white text-gray-800 border-gray-300"}`}
+                style={{ ["--brand-green"]: BRAND.green }}>Все</button>
               {categories.map((c) => {
                 const active = String(cat) === String(c.id);
                 const IconComp = CAT_ICON[c.name];
                 return (
-                  <button
-                    key={c.id}
-                    onClick={() => {
-                      setCat(c.id);
-                      setSub("all");
-                    }}
-                    className={`px-3 py-1.5 rounded-full text-sm border flex items-center gap-2 ${
-                      active
-                        ? "bg-[color:var(--brand-green)] text-white border-transparent"
-                        : "bg-white text-gray-800 border-gray-300"
-                    }`}
-                    style={{ ["--brand-green"]: BRAND.green }}
-                  >
-                    <IconSafe Comp={IconComp} className="text-base" />
-                    {c.name}
+                  <button key={c.id} onClick={() => { setCat(c.id); setSub("all"); }}
+                    className={`px-3 py-1.5 rounded-full text-sm border flex items-center gap-2 ${active ? "bg-[color:var(--brand-green)] text-white border-transparent" : "bg-white text-gray-800 border-gray-300"}`}
+                    style={{ ["--brand-green"]: BRAND.green }}>
+                    <IconSafe Comp={IconComp} className="text-base" />{c.name}
                   </button>
                 );
               })}
             </div>
           </div>
-
           {cat !== "all" && !!subs.length && (
             <div className="mt-1">
-              <div className="text-[13px] font-semibold text-gray-800 mb-2">
-                Подкатегория
-              </div>
+              <div className="text-[13px] font-semibold text-gray-800 mb-2">Подкатегория</div>
               <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setSub("all")}
-                  className={`px-3 py-1.5 rounded-full text-sm border ${
-                    sub === "all"
-                      ? "bg-slate-900 text-white border-transparent"
-                      : "bg-white text-gray-800 border-gray-300"
-                  }`}
-                >
+                <button onClick={() => setSub("all")}
+                  className={`px-3 py-1.5 rounded-full text-sm border ${sub === "all" ? "bg-slate-900 text-white border-transparent" : "bg-white text-gray-800 border-gray-300"}`}>
                   Все подкатегории
                 </button>
                 {subs.map((s) => {
                   const active = String(sub) === String(s.id);
                   return (
-                    <button
-                      key={s.id}
-                      onClick={() => setSub(s.id)}
-                      className={`px-3 py-1.5 rounded-full text-sm border ${
-                        active
-                          ? "bg-slate-900 text-white border-transparent"
-                          : "bg-white text-gray-800 border-gray-300"
-                      }`}
-                    >
+                    <button key={s.id} onClick={() => setSub(s.id)}
+                      className={`px-3 py-1.5 rounded-full text-sm border ${active ? "bg-slate-900 text-white border-transparent" : "bg-white text-gray-800 border-gray-300"}`}>
                       {s.name}
                     </button>
                   );
@@ -429,27 +266,11 @@ function FilterModal({
             </div>
           )}
         </div>
-
         <div className="px-5 pb-5 flex flex-col sm:flex-row gap-2 sm:gap-3 sm:items-center sm:justify-end">
-          <button
-            onClick={() => {
-              setCat("all");
-              setSub("all");
-              onApply?.("all", "all");
-              onClose();
-            }}
-            className="h-10 px-4 rounded-full border border-gray-300 bg-white text-gray-800 text-sm font-semibold hover:bg-gray-50"
-          >
-            Сбросить
-          </button>
-          <button
-            onClick={() => {
-              onApply?.(cat, sub);
-              onClose();
-            }}
-            className="h-10 px-5 rounded-full text-white text-sm font-semibold"
-            style={{ background: BRAND.green }}
-          >
+          <button onClick={() => { setCat("all"); setSub("all"); onApply?.("all", "all"); onClose(); }}
+            className="h-10 px-4 rounded-full border border-gray-300 bg-white text-gray-800 text-sm font-semibold hover:bg-gray-50">Сбросить</button>
+          <button onClick={() => { onApply?.(cat, sub); onClose(); }}
+            className="h-10 px-5 rounded-full text-white text-sm font-semibold" style={{ background: BRAND.green }}>
             Показать результаты
           </button>
         </div>
@@ -458,193 +279,62 @@ function FilterModal({
   );
 }
 
-/* ====== ФОРМА ЗАЯВКИ ====== */
-function RequestForm() {
-  const [detailsOpen, setDetailsOpen] = useState(false);
-  return (
-    <form className="max-w-xl mx-auto px-4 py-6">
-      <div>
-        <label className="block text-[15px] font-semibold text-gray-900 mb-2">
-          Что нужно сделать?
-        </label>
-        <textarea
-          rows={4}
-          placeholder="Какую работу нужно выполнить? Кратко опишите задачу — двух-трех предложений хватит..."
-          className="w-full rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm text-gray-800 p-3 placeholder:text-gray-400"
-        />
-        <p className="mt-2 text-[12px] text-gray-500">
-          Ниже заполните детали (по желанию) или прикрепите фото проблемы — так
-          мастеру будет проще оценить ситуацию и предложить решение.
-        </p>
-      </div>
-
-      <div className="mt-6">
-        <label className="block text-[15px] font-semibold text-gray-900 mb-2">
-          Как с вами связаться?
-        </label>
-        <div className="flex items-center gap-2 border rounded-xl px-3 py-2.5">
-          <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Flag_of_Tajikistan.svg"
-            alt="TJ"
-            width={20}
-            height={14}
-            className="rounded-sm"
-          />
-          <input
-            type="tel"
-            defaultValue="+992"
-            placeholder="+992"
-            className="flex-1 outline-none text-sm text-gray-800 placeholder:text-gray-400"
-          />
-        </div>
-      </div>
-
-      <div className="mt-6 border rounded-2xl p-3 border-emerald-500 bg-white shadow-[0_2px_8px_rgba(16,185,129,.08)]">
-        <p className="text-[13px] text-gray-600 mb-2">
-          Получите больше откликов, заполнив детали
-        </p>
-        <button
-          type="button"
-          onClick={() => setDetailsOpen((v) => !v)}
-          className="w-full flex items-center justify-between text-sm font-semibold text-gray-700 bg-gray-100/60 rounded-full px-4 py-2"
-        >
-          <span>Заполнить детали</span>
-          <LuChevronDown
-            className={`text-[18px] transition-transform ${
-              detailsOpen ? "rotate-180" : ""
-            }`}
-          />
-        </button>
-        {detailsOpen && (
-          <div className="mt-4 grid gap-3">
-            <input
-              type="text"
-              placeholder="Адрес (улица, дом, подъезд)"
-              className="w-full rounded-xl border border-gray-300 p-3 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            />
-            <input
-              type="text"
-              placeholder="Удобное время (например, сегодня 15:00–18:00)"
-              className="w-full rounded-xl border border-gray-300 p-3 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
-            />
-            <label className="block">
-              <span className="text-[13px] text-gray-600">
-                Фото проблемы (по желанию)
-              </span>
-              <input
-                type="file"
-                accept="image/*"
-                className="mt-1 block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-emerald-50 file:py-2 file:px-3 file:text-emerald-700 hover:file:bg-emerald-100"
-              />
-            </label>
-          </div>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        className="mt-6 w-full rounded-full bg-emerald-500 py-3.5 text-white font-semibold text-sm hover:bg-emerald-600 transition"
-      >
-        Отправить заявку
-      </button>
-    </form>
-  );
-}
-
-/* ====== ГЛАВНЫЙ КОМПОНЕНТ ====== */
-export default function ServicesCatalog({
-  activeTabKey = "masters",
-  cityId,
-  pageSize = 12,
-  pricesPerCard = 5,
-}) {
+export default function ServicesCatalog({ activeTabKey = "masters", cityId, pageSize = 12, pricesPerCard = 5 }) {
   const [tabKey, setTabKey] = useState(activeTabKey);
   const tabs = ALL_TABS;
-  const idx = useMemo(
-    () =>
-      Math.max(
-        0,
-        tabs.findIndex((t) => t.key === tabKey)
-      ),
-    [tabs, tabKey]
-  );
-  const [underlineStyle, setUnderlineStyle] = useState({
-    transform: "translateX(0)",
-    width: 0,
-  });
+  const idx = useMemo(() => Math.max(0, tabs.findIndex((t) => t.key === tabKey)), [tabs, tabKey]);
+  const [underlineStyle, setUnderlineStyle] = useState({ transform: "translateX(0)", width: 0 });
   const tabMeasureRefs = useRef([]);
 
-  /* модал фильтра */
   const [filterOpen, setFilterOpen] = useState(false);
 
   useEffect(() => {
-    const el = tabMeasureRefs.current[idx];
-    if (!el) return;
-    const { left, width } = el.getBoundingClientRect();
-    const parentLeft = el.parentElement.getBoundingClientRect().left;
-    const w = Math.max(56, width * 0.28);
-    const x = left - parentLeft + (width - w) / 2;
-    setUnderlineStyle({ transform: `translateX(${x}px)`, width: w });
+    const recalc = () => {
+      const el = tabMeasureRefs.current[idx];
+      if (!el) return;
+      const { left, width } = el.getBoundingClientRect();
+      const parentLeft = el.parentElement.getBoundingClientRect().left;
+      const w = Math.max(56, width * 0.28);
+      const x = left - parentLeft + (width - w) / 2;
+      setUnderlineStyle({ transform: `translateX(${x}px)`, width: w });
+    };
+    recalc();
+    window.addEventListener("resize", recalc);
+    return () => window.removeEventListener("resize", recalc);
   }, [idx, tabs.length]);
 
-  /* Данные */
   const { data: categories = [] } = useGetCategoriesQuery();
-  const { data: services = [], isLoading: loadingServices } =
-    useGetServicesQuery();
+  const { data: services = [], isLoading: loadingServices } = useGetServicesQuery();
 
   const [page, setPage] = useState(1);
   const [rows, setRows] = useState([]);
-  const { data: pageData = [], isLoading: loadingMasters } = useGetMastersQuery(
-    {
-      cityId,
-      categoryId: undefined,
-      page,
-      limit: pageSize,
-    }
-  );
+
+  // Нормализуем ответ мастеров на массив
+  const qMasters = useGetMastersQuery({ cityId, categoryId: undefined, page, limit: pageSize });
+  const raw = qMasters.data;
+  const pageData = Array.isArray(raw) ? raw : (raw?.rows ?? raw?.data ?? []);
+  const loadingMasters = qMasters.isLoading;
 
   useEffect(() => {
     if (!pageData || pageData.length === 0) return;
     setRows((prev) =>
-      page === 1
-        ? pageData
-        : [
-            ...prev,
-            ...pageData.filter((item) => !prev.some((p) => p.id === item.id)),
-          ]
+      page === 1 ? pageData : [...prev, ...pageData.filter((item) => !prev.some((p) => p.id === item.id))]
     );
   }, [pageData, page]);
 
-  /* Фильтры (применяются из модалки) */
   const [cat, setCat] = useState("all");
   const [sub, setSub] = useState("all");
-  const [mix, setMix] = useState(0); // для перемешивания, если all
+  const [mix, setMix] = useState(0);
 
-  const activeCatObj = useMemo(
-    () =>
-      cat === "all"
-        ? null
-        : categories.find((c) => String(c.id) === String(cat)),
-    [cat, categories]
-  );
+  const activeCatObj = useMemo(() => (cat === "all" ? null : categories.find((c) => String(c.id) === String(cat))), [cat, categories]);
   const activeSubs = activeCatObj?.subcategories || [];
+  const catNameById = useMemo(() => Object.fromEntries(categories.map((c) => [String(c.id), c.name])), [categories]);
 
-  const catNameById = useMemo(
-    () => Object.fromEntries(categories.map((c) => [String(c.id), c.name])),
-    [categories]
-  );
-
-  /* фильтрация */
   const mastersFiltered = useMemo(() => {
     let list = rows;
-    if (cat !== "all")
-      list = list.filter((m) => Number(m.categoryId) === Number(cat));
+    if (cat !== "all") list = list.filter((m) => Number(m.categoryId) === Number(cat));
     if (sub !== "all")
-      list = list.filter(
-        (m) =>
-          Array.isArray(m.subCategoryIds) &&
-          m.subCategoryIds.includes(Number(sub))
-      );
+      list = list.filter((m) => Array.isArray(m.subCategoryIds) && m.subCategoryIds.includes(Number(sub)));
     return list;
   }, [rows, cat, sub]);
 
@@ -654,9 +344,7 @@ export default function ServicesCatalog({
     if (cat !== "all") {
       const catId = Number(cat);
       list = list.filter((s) =>
-        s.categoryId != null
-          ? Number(s.categoryId) === catId
-          : activeCatObj && s.category === activeCatObj.name
+        s.categoryId != null ? Number(s.categoryId) === catId : activeCatObj && s.category === activeCatObj.name
       );
     }
     if (sub !== "all") {
@@ -665,8 +353,7 @@ export default function ServicesCatalog({
         s.subCategoryId != null
           ? Number(s.subCategoryId) === subId
           : activeSubs.find((x) => Number(x.id) === subId)
-          ? s.subcategory ===
-            activeSubs.find((x) => Number(x.id) === subId)?.name
+          ? s.subcategory === activeSubs.find((x) => Number(x.id) === subId)?.name
           : true
       );
     }
@@ -674,18 +361,15 @@ export default function ServicesCatalog({
     return list;
   }, [services, cat, sub, activeCatObj, activeSubs, mix]);
 
-  /* группировка для вкладки Цены */
   const groupedServices = useMemo(() => {
     const map = new Map();
     for (const s of servicesFiltered) {
-      const cId =
-        s.categoryId ?? categories.find((c) => c.name === s.category)?.id;
+      const cId = s.categoryId ?? categories.find((c) => c.name === s.category)?.id;
       if (!cId) continue;
       if (!map.has(cId)) map.set(cId, []);
       map.get(cId).push(s);
     }
-    for (const [k, arr] of map.entries())
-      arr.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+    for (const [k, arr] of map.entries()) arr.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
     return map;
   }, [servicesFiltered, categories]);
 
@@ -708,36 +392,25 @@ export default function ServicesCatalog({
   const isMastersTab = tabKey === "masters";
   const isPricesTab = tabKey === "prices";
 
-  const isLoading = isMastersTab
-    ? loadingMasters && rows.length === 0
-    : loadingServices;
-  const canLoadMore = isMastersTab
-    ? (pageData?.length || 0) >= pageSize
-    : false;
+  const isLoading = isMastersTab ? loadingMasters && rows.length === 0 : loadingServices;
+  const canLoadMore = isMastersTab ? (pageData?.length || 0) >= pageSize : false;
 
   return (
     <section className="w-full bg-white">
-      <div>
-        <HeroSpotlight />
-      </div>
+      {/* Табы */}
       <div className="relative">
         <div className="grid grid-cols-3 md:grid-cols-5 gap-4 px-4 sm:px-6">
           {ALL_TABS.map((t, i) => {
             const isActive = t.key === tabKey;
             const content = (
               <>
-                <div
-                  ref={(n) => (tabMeasureRefs.current[i] = n)}
-                  className="relative flex items-center gap-2"
-                >
+                <div ref={(n) => (tabMeasureRefs.current[i] = n)} className="relative flex items-center gap-2">
                   <IconSafe Comp={t.icon} className="text-2xl" />
                   {t.badge && (
                     <span
                       className={[
                         "px-1.5 py-[1px] rounded-md text-[11px] font-semibold",
-                        isActive
-                          ? "bg-[color:var(--brand-green)] text-white"
-                          : "bg-gray-200 text-gray-700",
+                        isActive ? "bg-[color:var(--brand-green)] text-white" : "bg-gray-200 text-gray-700",
                       ].join(" ")}
                       style={{ ["--brand-green"]: BRAND.green }}
                     >
@@ -748,7 +421,6 @@ export default function ServicesCatalog({
                 <div className="mt-1 text-sm font-medium">{t.label}</div>
               </>
             );
-
             return t.local ? (
               <button
                 key={t.key}
@@ -779,47 +451,32 @@ export default function ServicesCatalog({
             );
           })}
         </div>
-
         <div className="absolute left-0 right-0 bottom-0 h-px bg-gray-200" />
-        <div
-          className="absolute bottom-0 h-[3px] rounded-full transition-transform duration-300 ease-out"
-          style={{
-            backgroundColor: BRAND.green,
-            width: underlineStyle.width,
-            transform: underlineStyle.transform,
-          }}
-        />
+        <div className="absolute bottom-0 h-[3px] rounded-full transition-transform duration-300 ease-out"
+          style={{ backgroundColor: BRAND.green, width: underlineStyle.width, transform: underlineStyle.transform }} />
       </div>
 
-      {/* заголовок + кнопка фильтра (кроме "Заявка") */}
+      {/* Заголовок + фильтр (кроме заявки) */}
       {!isRequestTab && (
         <div className="flex items-center justify-between px-4 sm:px-0 mt-4">
           <h2 className="text-sm sm:text-base font-semibold text-gray-900 uppercase tracking-wider">
             {isMastersTab ? "Мастера" : isPricesTab ? "Цены" : "Сервисы"}
           </h2>
-          <button
-            onClick={() => setFilterOpen(true)}
-            className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
-          >
-            <LuFilter />
-            фильтр
+          <button onClick={() => setFilterOpen(true)} className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900">
+            <LuFilter /> фильтр
           </button>
         </div>
       )}
 
-      {/* вкладка "Заявка" */}
+      {/* Контент */}
       {isRequestTab ? (
-        <RequestForm />
+        <div className="p-4 text-sm text-gray-500">Тут может быть форма заявки (если нужно — добавлю)</div>
       ) : (
         <>
-          {/* СЕТКА */}
           <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {isLoading &&
               Array.from({ length: pageSize }).map((_, i) => (
-                <div
-                  key={i}
-                  className="rounded-[22px] border border-gray-100 shadow-[0_12px_40px_rgba(17,24,39,0.08)] overflow-hidden bg-white animate-pulse"
-                >
+                <div key={i} className="rounded-[22px] border border-gray-100 shadow-[0_12px_40px_rgba(17,24,39,0.08)] overflow-hidden bg-white animate-pulse">
                   <div className="w-full h-40 bg-gray-100" />
                   <div className="p-6 space-y-4">
                     <div className="h-4 w-3/4 bg-gray-100 rounded" />
@@ -829,67 +486,40 @@ export default function ServicesCatalog({
                 </div>
               ))}
 
-            {!isLoading &&
-              isMastersTab &&
-              mastersFiltered.map((m) => (
-                <MasterCard
-                  key={m.id}
-                  m={m}
-                  catName={catNameById[String(m.categoryId)]}
-                />
-              ))}
+            {!isLoading && isMastersTab && mastersFiltered.map((m) => (
+              <MasterCard key={m.id} m={m} catName={catNameById[String(m.categoryId)]} />
+            ))}
 
-            {!isLoading &&
-              isPricesTab &&
+            {!isLoading && isPricesTab &&
               visibleCatsForPrices.map((c) => {
-                const items = (groupedServices.get(c.id) || []).slice(
-                  0,
-                  pricesPerCard
-                );
-                return (
-                  <PriceCard
-                    key={c.id}
-                    cat={c}
-                    items={items}
-                    mastersCount={mastersCountByCat[c.id] || 0}
-                  />
-                );
+                const items = (groupedServices.get(c.id) || []).slice(0, pricesPerCard);
+                return <PriceCard key={c.id} cat={c} items={items} mastersCount={mastersCountByCat[c.id] || 0} />;
               })}
 
-            {!isLoading &&
-              !isMastersTab &&
-              !isPricesTab &&
-              servicesFiltered.map((s) => (
-                <ServiceCard key={s.id} s={s} catLabel={activeCatObj?.name} />
-              ))}
+            {!isLoading && !isMastersTab && !isPricesTab && servicesFiltered.map((s) => (
+              <ServiceCard key={s.id} s={s} catLabel={activeCatObj?.name} />
+            ))}
           </div>
 
-          {/* пагинация (мастера) */}
+          {/* Пагинация мастеров */}
           {isMastersTab && (
             <div className="flex items-center justify-center my-6">
-              {(pageData?.length || 0) >= pageSize ? (
-                <button
-                  onClick={() => setPage((p) => p + 1)}
+              {canLoadMore ? (
+                <button onClick={() => setPage((p) => p + 1)}
                   className="px-6 py-3 rounded-full bg-[#F2F9F4] text-[color:var(--brand-green)] font-semibold border border-green-200 hover:bg-green-50"
-                  style={{ ["--brand-green"]: BRAND.green }}
-                >
+                  style={{ ["--brand-green"]: BRAND.green }}>
                   Загрузить ещё
                 </button>
               ) : (
-                <div className="text-sm text-gray-500">
-                  Это все мастера по текущему фильтру
-                </div>
+                <div className="text-sm text-gray-500">Это все мастера по текущему фильтру</div>
               )}
             </div>
           )}
 
-          {/* “Посмотреть все” — только для вкладки Сервисы */}
+          {/* “Посмотреть все” для сервисов */}
           {!isMastersTab && !isPricesTab && (
             <div className="flex items-center justify-center text-sm text-gray-600 mt-6">
-              <Link
-                href="/services"
-                className="group inline-flex items-center gap-1"
-              >
+              <Link href="/services" className="group inline-flex items-center gap-1">
                 <span>Посмотреть все</span>
                 <LuChevronRight className="text-[18px] text-[#00B140] transition-transform group-hover:translate-x-0.5" />
               </Link>
@@ -898,18 +528,14 @@ export default function ServicesCatalog({
         </>
       )}
 
-      {/* модал фильтра — единственный способ выбрать категорию/подкатегорию */}
+      {/* Модал фильтра */}
       <FilterModal
         open={!isRequestTab && filterOpen}
         onClose={() => setFilterOpen(false)}
         categories={categories}
         currentCat={cat}
         currentSub={sub}
-        onApply={(newCat, newSub) => {
-          setCat(newCat);
-          setSub(newSub);
-          if (newCat === "all") setMix((v) => v + 1); // перемешаем, как раньше, если "Все"
-        }}
+        onApply={(newCat, newSub) => { setCat(newCat); setSub(newSub); if (newCat === "all") setMix((v) => v + 1); }}
       />
     </section>
   );
