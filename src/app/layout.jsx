@@ -24,15 +24,19 @@ import Providers from "@/app/providers";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { url } from "zod";
+import { CityProvider } from "./city-provider";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <body>
         <Providers>
+          <CityProvider>
+
           <Navbar />
           <main className="section container">{children}</main>
           <Footer/>
+          </CityProvider>
         </Providers>
       </body>
     </html>

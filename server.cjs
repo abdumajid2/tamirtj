@@ -27,6 +27,7 @@ const STATIC_ORIGINS = [
   "http://localhost:3005",
   "http://127.0.0.1:3005",
   "https://tamirtj-uiff.vercel.app",
+  "https://tamirtj-mu.vercel.app",
 ];
 
 function isAllowedOrigin(origin) {
@@ -63,6 +64,10 @@ app.use(cookieParser());
 /* ---------------- In-Memory DB ---------------- */
 const users = new Map(); // email -> user
 let seqId = 1;
+
+const orders = []; // { id, userId, categoryId, subCategoryId, cityId, phone, description, status, createdAt }
+let orderSeq = 1;
+const nextOrderId = () => String(orderSeq++);
 
 const threads = [];  // { id, userId, masterId, lastTs, lastMessage }
 const messages = []; // { id, threadId, from, text, createdAt }
@@ -350,6 +355,26 @@ app.post("/auth/logout", (req, res) => {
   return res.sendStatus(204);
 });
 
+app.post("/orders", (req, res) => {
+  const { userId, categoryId, subCategoryId, cityId, phone, description } = req.body || {};
+  if (!categoryId || !cityId || !phone || !description) {
+    return res.status(400).json({ message: "categoryId, cityId, phone, description required" });
+  }
+  const o = {
+    id: nextOrderId(),
+    userId: userId ? String(userId) : null, // можно пустым, если нет авторизации
+    categoryId: Number(categoryId),
+    subCategoryId: subCategoryId ? Number(subCategoryId) : null,
+    cityId: Number(cityId),
+    phone: String(phone),
+    description: String(description).trim(),
+    status: "new",
+    createdAt: new Date().toISOString(),
+  };
+  orders.push(o);
+  res.status(201).json(o);
+});
+
 // DICTS
 app.get("/cities", (_req, res) => res.json(CITIES));
 app.get("/categories", (_req, res) => res.json(CATEGORIES));
@@ -360,6 +385,15 @@ app.get("/services", (req, res) => {
   let list = SERVICES.slice();
   if (categoryId)    list = list.filter(s => Number(s.categoryId)    === Number(categoryId));
   if (subCategoryId) list = list.filter(s => Number(s.subCategoryId) === Number(subCategoryId));
+  res.json(list);
+});
+
+
+app.get("/orders", (req, res) => {
+  let list = orders.slice();
+  const { userId } = req.query;
+  if (userId != null) list = list.filter(o => String(o.userId) === String(userId));
+  // для совместимости можно вернуть пустую, если нет — просто отдадим list
   res.json(list);
 });
 
