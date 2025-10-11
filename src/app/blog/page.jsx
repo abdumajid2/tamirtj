@@ -35,7 +35,7 @@ const POSTS = [
     category: "СОВЕТЫ ПО РЕМОНТУ",
     title: "Газовая колонка шумит при работе: причины шума, опасности и что делать",
     date: "25.08.2025",
-    image: "https://images.unsplash.com/photo-1581091014534-8987c1d647cc?q=80&w=1600&auto=format&fit=crop",
+    image: "/hero/slide-1.jpg",
     categoryId: "plumbing",
   },
   {
@@ -43,7 +43,7 @@ const POSTS = [
     category: "СЛОВАРЬ РЕМОНТА",
     title: "Почему из бойлера идет холодная вода — причины и что делать",
     date: "25.08.2025",
-    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1600&auto=format&fit=crop",
+    image: "/hero/slide-2.jpg",
     categoryId: "plumbing",
   },
   {
@@ -51,7 +51,7 @@ const POSTS = [
     category: "МАСТЕРА",
     title: "От косметики до капитального ремонта: опыт мастера Зуфара и его бригады",
     date: "18.08.2025",
-    image: "https://images.unsplash.com/photo-1596079890744-c1a0462d4b3f?q=80&w=1600&auto=format&fit=crop",
+    image: "/hero/slide-3.jpg",
     categoryId: "build",
   },
   {
@@ -59,7 +59,7 @@ const POSTS = [
     category: "СОВЕТЫ ПО РЕМОНТУ",
     title: "Газовый котел отключается сам по себе — причины и что делать",
     date: "12.08.2025",
-    image: "https://images.unsplash.com/photo-1604014237800-1c9102c9f935?q=80&w=1600&auto=format&fit=crop",
+    image: "/hero/slide-4.jpg",
     categoryId: "plumbing",
   },
   {
@@ -67,7 +67,7 @@ const POSTS = [
     category: "СОВЕТЫ ПО РЕМОНТУ",
     title: "Нет давления воды в газовой колонке: 5 причин и что делать",
     date: "10.08.2025",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1600&auto=format&fit=crop",
+    image: "/hero/slide-5.jpg",
     categoryId: "plumbing",
   },
   {
@@ -75,7 +75,7 @@ const POSTS = [
     category: "ГИД",
     title: "ГКЛ: Как выбрать и где применять",
     date: "08.08.2025",
-    image: "https://images.unsplash.com/photo-1600573472591-ee5f2ff3b9a3?q=80&w=1600&auto=format&fit=crop",
+    image: "/hero/slide-6.jpg",
     categoryId: "build",
   },
 ];
@@ -148,7 +148,15 @@ export default function BlogPage() {
     <section className="w-full">
       {/* ⬇️ Хедер блога на HeroSpotlight */}
       <HeroSpotlight
-        slides={slides}
+        slides={POSTS.slice(0, 5).map((p) => ({
+          src: p.image,
+          alt: p.title,
+          title: p.title,
+          badge: p.category,
+          ctaText: "Читать дальше",
+          ctaHref: `/blog/${p.id}`,
+        }))}
+        
         // дефолты (если в слайде не задано)
         badge="Советы по ремонту"
         title="Лучшие статьи и разборы от Tamir"

@@ -4,10 +4,9 @@ import store from "@/store";
 import { useEffect, useRef, useState } from "react";
 import {
   hydrateAuth,
-  setAuth,
+  setsetCredentialsAuth,
   clearAuth,
-  readAuthFromStorage,
-  writeAuthToStorage,
+  
 } from "@/store/authSlice";
 
 function useSilentRefreshOnce() {
