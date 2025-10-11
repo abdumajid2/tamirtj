@@ -71,6 +71,15 @@ export const baseApi = createApi({
       providesTags: ["Offers"],
     }),
 
+    createOrder: build.mutation({
+      query: (body) => ({ url: "/orders", method: "POST", body }),
+      invalidatesTags: ["Orders"],
+    }),
+    getOrders: build.query({
+      query: (params) => ({ url: "/orders", params }),
+      providesTags: ["Orders"],
+    }),
+
     // отзывы/комменты
     getReviews: build.query({ query: () => "/reviews", providesTags: ["Reviews"] }),
     getComments: build.query({ query: () => "/comments", providesTags: ["Comments"] }),
@@ -131,4 +140,5 @@ export const {
   useGetMessagesQuery,
   useSendMessageMutation,
   useCreateThreadMutation,
+  useCreateOrderMutation,
 } = baseApi;

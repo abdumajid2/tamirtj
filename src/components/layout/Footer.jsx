@@ -7,44 +7,48 @@ import { useState } from "react";
 import {
   Facebook, Instagram, Youtube, Linkedin, Phone, Mail, MapPin, Clock
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const BRAND_GREEN = "#00B140";
-const BRAND_DARK = "#111827";
 
 const NAV = {
   product: [
     { href: "/services", label: "Сервисы" },
-    { href: "/masters", label: "Мастера" },
-    { href: "/companies", label: "Компании" },
-    { href: "/orders", label: "Заявки" },
-    { href: "/blog", label: "Блог" },
+    { href: "/masters",  label: "Мастера" },
+    { href: "/companies",label: "Компании" },
+    { href: "/orders",   label: "Заявки" },
+    { href: "/blog",     label: "Блог" },
   ],
   company: [
-    { href: "/about", label: "О проекте" },
+    { href: "/about",    label: "О проекте" },
     { href: "/contacts", label: "Контакты" },
-    { href: "/pricing", label: "Цены" },
+    { href: "/pricing",  label: "Цены" },
     { href: "/partners", label: "Партнёрам" },
   ],
   help: [
-    { href: "/faq", label: "FAQ" },
-    { href: "/safety", label: "Безопасная сделка" },
-    { href: "/support", label: "Поддержка" },
+    { href: "/faq",          label: "FAQ" },
+    { href: "/safety",       label: "Безопасная сделка" },
+    { href: "/support",      label: "Поддержка" },
     { href: "/how-it-works", label: "Как это работает" },
   ],
   legal: [
     { href: "/privacy", label: "Политика конфиденциальности" },
-    { href: "/terms", label: "Пользовательское соглашение" },
+    { href: "/terms",   label: "Пользовательское соглашение" },
     { href: "/cookies", label: "Cookies" },
-    { href: "/offer", label: "Публичная оферта" },
+    { href: "/offer",   label: "Публичная оферта" },
   ],
 };
 
 export default function Footer({ logoSrc = "/logo.png" }) {
+  const pathname = usePathname();
+  const hideFooter = pathname === "/login" || pathname === "/register";
+
   const [email, setEmail] = useState("");
+
+  if (hideFooter) return null;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // тут подключишь свой API подписки
     setEmail("");
     alert("Спасибо! Мы добавили ваш email в список рассылки.");
   };
@@ -66,22 +70,22 @@ export default function Footer({ logoSrc = "/logo.png" }) {
             </p>
 
             <div className="mt-5 flex items-center gap-3">
-              <Link aria-label="Instagram" href="https://instagram.com" className="group">
+              <Link aria-label="Instagram" href="https://instagram.com" target="_blank" rel="noreferrer" className="group">
                 <span className="grid h-9 w-9 place-items-center rounded-full border border-gray-200 transition-colors group-hover:bg-gray-50">
                   <Instagram className="h-5 w-5 text-gray-700" />
                 </span>
               </Link>
-              <Link aria-label="Facebook" href="https://facebook.com" className="group">
+              <Link aria-label="Facebook" href="https://facebook.com" target="_blank" rel="noreferrer" className="group">
                 <span className="grid h-9 w-9 place-items-center rounded-full border border-gray-200 transition-colors group-hover:bg-gray-50">
                   <Facebook className="h-5 w-5 text-gray-700" />
                 </span>
               </Link>
-              <Link aria-label="YouTube" href="https://youtube.com" className="group">
+              <Link aria-label="YouTube" href="https://youtube.com" target="_blank" rel="noreferrer" className="group">
                 <span className="grid h-9 w-9 place-items-center rounded-full border border-gray-200 transition-colors group-hover:bg-gray-50">
                   <Youtube className="h-5 w-5 text-gray-700" />
                 </span>
               </Link>
-              <Link aria-label="LinkedIn" href="https://linkedin.com" className="group">
+              <Link aria-label="LinkedIn" href="https://linkedin.com" target="_blank" rel="noreferrer" className="group">
                 <span className="grid h-9 w-9 place-items-center rounded-full border border-gray-200 transition-colors group-hover:bg-gray-50">
                   <Linkedin className="h-5 w-5 text-gray-700" />
                 </span>
