@@ -5,7 +5,6 @@ import Result from "@/components/sections/result";
 import ServicesSection from "@/components/sections/services";
 import Category from "@/components/category/category";
 import HowItWorks from "@/components/hero/howitworks";
-import ReviewsAndFaq from "@/components/hero/reviews";
 import ReviewsCarousel from "@/components/sections/ReviewsCarousel";
 import FaqList from "@/components/sections/FaqList";
 

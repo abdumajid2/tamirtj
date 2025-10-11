@@ -27,6 +27,9 @@ function readAccessTokenFromLS() {
       } catch {}
     }
 
+    // delete authToken in localstorage
+
+
     const rootRaw = localStorage.getItem("persist:root");
     if (rootRaw) {
       try {
@@ -325,12 +328,12 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/logo.png"
+              src="/tamirlogo.png"
               alt="Tamir.tj"
-              width={150}
-              height={100}
+              width={80}
+              height={80}
               className="rounded"
-              style={{ width: "auto", height: "auto" }}
+              style={{ width: "auto", height: "90px" }}
               priority
             />
           </Link>
